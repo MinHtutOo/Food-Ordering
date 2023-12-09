@@ -16,15 +16,15 @@
     <link rel="shortcut icon" href="favicon.png">
 
     <!-- CSS Files -->
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/meanmenu.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/jquery-ui.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{!!asset('/css/animate.css')!!}">
+    <link rel="stylesheet" href="{!!asset('/css/meanmenu.min.css')!!}">
+    <link rel="stylesheet" href="{!!asset('/css/bootstrap.min.css')!!}">
+    <link rel="stylesheet" href="{!!asset('/css/fontawesome.min.css')!!}">
+    <link rel="stylesheet" href="{!!asset('/css/all.min.css')!!}">
+    <link rel="stylesheet" href="{!!asset('/css/magnific-popup.css')!!}">
+    <link rel="stylesheet" href="{!!asset('/css/slick.css')!!}">
+    <link rel="stylesheet" href="{!!asset('/css/jquery-ui.css')!!}">
+    <link rel="stylesheet" href="{!!asset('/css/style.css')!!}">
 </head>
 
 <body>
@@ -36,19 +36,19 @@
 @include('layout.footer')
 
 <!-- Javascript Files -->
-<script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
-<script src="assets/js/vendor/bootstrap.min.js"></script>
-<script src="assets/js/vendor/jquery.meanmenu.min.js"></script>
-<script src="assets/js/vendor/jquery.magnific-popup.min.js"></script>
-<script src="assets/js/vendor/slick.min.js"></script>
-<script src="assets/js/vendor/counterup.min.js"></script>
-<script src="assets/js/vendor/countdown.js"></script>
-<script src="assets/js/vendor/waypoints.min.js"></script>
-<script src="assets/js/vendor/jquery-ui.js"></script>
-<script src="assets/js/vendor/isotope.pkgd.min.js"></script>
-<script src="assets/js/vendor/easing.min.js"></script>
-<script src="assets/js/vendor/wow.min.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="{!!asset('/js/vendor/jquery-2.2.4.min.js')!!}"></script>
+<script src="{!!asset('/js/vendor/bootstrap.min.js')!!}"></script>
+<script src="{!!asset('/js/vendor/jquery.meanmenu.min.js')!!}"></script>
+<script src="{!!asset('/js/vendor/jquery.magnific-popup.min.js')!!}"></script>
+<script src="{!!asset('/js/vendor/slick.min.js')!!}"></script>
+<script src="{!!asset('/js/vendor/counterup.min.js')!!}"></script>
+<script src="{!!asset('/js/vendor/countdown.js')!!}"></script>
+<script src="{!!asset('/js/vendor/waypoints.min.js')!!}"></script>
+<script src="{!!asset('/js/vendor/jquery-ui.js')!!}"></script>
+<script src="{!!asset('/js/vendor/isotope.pkgd.min.js')!!}"></script>
+<script src="{!!asset('/js/vendor/easing.min.js')!!}"></script>
+<script src="{!!asset('/js/vendor/wow.min.js')!!}"></script>
+<script src="{!!asset('/js/main.js')!!}"></script>
 
 </body>
 

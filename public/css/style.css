@@ -631,6 +631,7 @@ footer .copyright-area p a {
     position: relative;
     overflow: hidden;
     background-image: url("../images/bg/breadcrumb.png") !important;
+    /* background-image: url("{!!asset('../images/bg/breadcrumb.png')!!}") !important; */
 }
 .breadcrumb-area nav {
     z-index: 0;

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\Resturant\RestaurantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +20,7 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/menu', function (){
+Route::get('/restaurant/index', function (){
     return view('menu');
 });
 
@@ -29,21 +32,21 @@ Route::get('/contact', function (){
     return view('contact');
 });
 
-Route::get('/checkout', function (){
-    return view('checkout');
-});
+Route::get('user/login', [AuthenticationController::class, 'login']);
+Route::post('user/login', [AuthenticationController::class, 'authenticate']);
 
-Route::get('/cart', function (){
-    return view('cart');
-});
+Route::get('user/signup', [AuthenticationController::class, 'create']);
+Route::post('user/signup', [AuthenticationController::class, 'update']);
 
-Route::get('/profile', function (){
-    return view('profile');
-});
+Route::get('user/cart', [UserController::class, 'addToCart']);
 
-Route::get('/login', function (){
-    return view('login');
-});
+Route::get('user/checkout', [UserController::class, 'checkout']);
+
+Route::get('user/profile', [UserController::class, 'viewProfile']);
+
+Route::get('restaurant/index', [RestaurantController::class, 'showAllRestaurant']);
+
+Route::get('restaurant/menu', [RestaurantController::class, 'showMenu']);
 
 Route::get('/signup', function (){
     return view('signup');

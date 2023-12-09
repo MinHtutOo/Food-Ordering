@@ -6,12 +6,12 @@
     <!-- breadcrumb-area -->
     <div class="banner-area breadcrumb-area padding-top-120 padding-bottom-90">
         <div class="bread-shapes">
-            <span class="b-shape-1 item-bounce"><img src="assets/images/img/5.png" alt=""></span>
-            <span class="b-shape-2"><img src="assets/images/img/6.png" alt=""></span>
-            <span class="b-shape-3"><img src="assets/images/img/7.png" alt=""></span>
-            <span class="b-shape-4"><img src="assets/images/img/9.png" alt=""></span>
-            <span class="b-shape-5"><img src="assets/images/shapes/18.png" alt=""></span>
-            <span class="b-shape-6 item-animateOne"><img src="assets/images/img/7.png" alt=""></span>
+            <span class="b-shape-1 item-bounce"><img src="{!!asset('/images/img/5.png')!!}" alt=""></span>
+            <span class="b-shape-2"><img src="{!!asset('/images/img/6.png')!!}" alt=""></span>
+            <span class="b-shape-3"><img src="{!!asset('/images/img/7.png')!!}" alt=""></span>
+            <span class="b-shape-4"><img src="{!!asset('/images/img/9.png')!!}" alt=""></span>
+            <span class="b-shape-5"><img src="{!!asset('/images/shapes/18.png')!!}" alt=""></span>
+            <span class="b-shape-6 item-animateOne"><img src="{!!asset('/images/img/7.png')!!}" alt=""></span>
         </div>
         <div class="container padding-top-120">
             <div class="row justify-content-center">
@@ -31,12 +31,12 @@
     <!-- checkout-area -->
     <div class="checkout-area padding-top-120 padding-bottom-120">
         <div class="cshapes">
-            <span class="cs-1"><img src="assets/images/img/6.png" alt=""></span>
-            <span class="cs-2 item-bounce"><img src="assets/images/shapes/12.png" alt=""></span>
-            <span class="cs-3"><img src="assets/images/shapes/13.png" alt=""></span>
-            <span class="cs-4"><img src="assets/images/shapes/14.png" alt=""></span>
-            <span class="cs-5"><img src="assets/images/img/32.png" alt=""></span>
-            <span class="cs-6"><img src="assets/images/shapes/16.png" alt=""></span>
+            <span class="cs-1"><img src="{!!asset('/images/img/6.png')!!}" alt=""></span>
+            <span class="cs-2 item-bounce"><img src="{!!asset('/images/shapes/12.png')!!}" alt=""></span>
+            <span class="cs-3"><img src="{!!asset('/images/shapes/13.png')!!}" alt=""></span>
+            <span class="cs-4"><img src="{!!asset('/images/shapes/14.png')!!}" alt=""></span>
+            <span class="cs-5"><img src="{!!asset('/images/img/32.png')!!}" alt=""></span>
+            <span class="cs-6"><img src="{!!asset('/images/shapes/16.png')!!}" alt=""></span>
         </div>
         <div class="container">
             <form action="#">
@@ -44,20 +44,10 @@
                     <div class="col-lg-6  wow fadeInUp">
                         <div class="checkout-left">
                             <h4>Billing Details</h4>
-                            <input type="text" placeholder="first name" required>
-                            <input type="text" placeholder="last name" required>
-                            <input type="text" placeholder="company name">
-                            <select name="#" id="#">
-                                <option value="#">Country</option>
-                                <option value="#">Country-1</option>
-                                <option value="#">Country-2</option>
-                                <option value="#">Country-3</option>
-                            </select>
-                            <input type="text" placeholder="street address">
-                            <input type="text" placeholder="town/city" required>
-                            <input type="number" placeholder="zip">
-                            <input type="tel" placeholder="phone" required>
+                            <input type="text" placeholder="name" required>
                             <input type="email" placeholder="email address" required>
+                            <input type="tel" placeholder="phone" required>
+                            <input type="text" placeholder="address">
                             <input type="text" placeholder="order notes(optional)">
                         </div>
                     </div>
@@ -104,7 +94,7 @@
                             <label for="check">CHECK PAYMENTS</label>
                             <br>
                             <div class="payment-img">
-                                <a href="#"><img src="assets/images/img/payment.png" alt=""></a>
+                                <a href="#"><img src="{!!asset('/images/img/payment.png')!!}" alt=""></a>
                             </div>
                             <input type="radio" id="cash">
                             <label for="cash">CASH ON DELIVERY</label>

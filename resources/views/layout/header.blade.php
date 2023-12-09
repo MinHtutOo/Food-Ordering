@@ -45,7 +45,7 @@
           <div class="col-lg-2 col-md-2 col-sm-2 col-3">
             <div class="logo">
               <a href="{{url('/')}}">
-                <img src="assets/images/logo/logo.png" alt="logo" /></a>
+                <img src="{!!asset('/images/logo/logo.png')!!}" alt="logo" /></a>
             </div>
           </div>
           <div class="col-lg-6 d-none d-lg-block">
@@ -55,31 +55,26 @@
                   <a href="{{url('/')}}">home</a>
                 </li>
                 <li><a href="{{url('about')}}">about us</a></li>
-                <li><a href="{{url('menu')}}">menu</a></li>
-                <li><a href="#">restaurants <span><i class="fas fa-angle-down"></i></span></a>
-                  <ul class="submenu">
-                      {{-- Note....need to loop restaurants --}}
-                      <li><a href="{{url('shop')}}">shop1</a></li>
-                      <li><a href="{{url('#')}}">shop2</a></li>
-                  </ul>
+                <li>
+                  <a href="{{url('/restaurant/index')}}">restaurants</a>
                 </li>
                 <li>
                   <a href="#">pages <span><i class="fas fa-angle-down"></i></span></a>
                   <ul class="submenu">
                     <li>
-                      <a href="{{url('checkout')}}">checkout page</a>
+                      <a href="{{url('user/checkout')}}">checkout page</a>
                     </li>
                     <li>
-                      <a href="{{url('cart')}}">shopping cart page</a>
+                      <a href="{{url('user/cart')}}">shopping cart page</a>
                     </li>
                     <li>
-                      <a href="{{url('profile')}}">profile page</a>
+                      <a href="{{url('user/profile')}}">profile page</a>
                     </li>
                     <li>
-                      <a href="{{url('login')}}">login page</a>
+                      <a href="{{url('user/login')}}">login page</a>
                     </li>
                     <li>
-                      <a href="{{url('signup')}}">signup page</a>
+                      <a href="{{url('user/signup')}}">signup page</a>
                     </li>
                     <li>
                       <a href="{{url('#')}}">404 page</a>
@@ -96,13 +91,13 @@
                 <a href="wishlist.html"><i class="fas fa-heart"></i></a>
               </span> --}}
               <span>
-                <a href="{{url('profile')}}"><i class="fas fa-user"></i></a>
+                <a href="{{url('user/profile')}}"><i class="fas fa-user"></i></a>
               </span>
               <span>
-                <a href="{{url('cart')}}"><i class="fas fa-shopping-basket"></i></a>
+                <a href="{{url('user/cart')}}"><i class="fas fa-shopping-basket"></i></a>
               </span>
               {{-- note use condition to logout --}}
-              <a href="{{url('login')}}" class="btn">login</a>
+              <a href="{{url('user/login')}}" class="btn">login</a>
             </div>
           </div>
         </div>

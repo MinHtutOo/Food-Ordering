@@ -1,13 +1,13 @@
   <!-- footer area -->
   <footer class="padding-top-40 padding-bottom-40">
     <div class="fo-shapes">
-      <span class="fs-1"><img src="assets/images/gallery/26.png" alt="" /></span>
-      <span class="fs-2 item-bounce"><img src="assets/images/shapes/25.png" alt="" /></span>
-      <span class="fs-3 item-bounce"><img src="assets/images/shapes/26.png" alt="" /></span>
-      <span class="fs-4 item-bounce"><img src="assets/images/shapes/27.png" alt="" /></span>
-      <span class="fs-5 item-animateTwo"><img src="assets/images/shapes/3.png" alt="" /></span>
-      <span class="fs-6"><img src="assets/images/shapes/22.png" alt="" /></span>
-      <span class="fs-7"><img src="assets/images/shapes/30.png" alt="" /></span>
+      <span class="fs-1"><img src="{!!asset('/images/gallery/26.png')!!}" alt="" /></span>
+      <span class="fs-2 item-bounce"><img src="{!!asset('/images/shapes/25.png')!!}" alt="" /></span>
+      <span class="fs-3 item-bounce"><img src="{!!asset('/images/shapes/26.png')!!}" alt="" /></span>
+      <span class="fs-4 item-bounce"><img src="{!!asset('/images/shapes/27.png')!!}" alt="" /></span>
+      <span class="fs-5 item-animateTwo"><img src="{!!asset('/images/shapes/3.png')!!}" alt="" /></span>
+      <span class="fs-6"><img src="{!!asset('/images/shapes/22.png')!!}" alt="" /></span>
+      <span class="fs-7"><img src="{!!asset('/images/shapes/30.png')!!}" alt="" /></span>
     </div>
     <div class="footer-top d-none d-md-block">
       <div class="container">
@@ -20,7 +20,7 @@
           <div class="col-lg-3 col-md-3">
             <div class="f-logo">
               <a href="{{url('/')}}">
-                <img src="assets/images/logo/logo.png" alt="" /></a>
+                <img src="{!!asset('/images/logo/logo.png')!!}" alt="" /></a>
             </div>
           </div>
           <div class="col-lg-6 col-md-6">
@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="col-lg-2 col-md-3">
-            <a href="shopping-cart.html" class="btn">order now</a>
+            <a href="{{url('user/cart')}}" class="btn">order now</a>
           </div>
         </div>
         <hr />

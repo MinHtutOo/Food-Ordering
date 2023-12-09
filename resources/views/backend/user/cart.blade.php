@@ -6,12 +6,12 @@
         <!-- breadcrumb-area -->
         <div class="banner-area breadcrumb-area padding-top-120 padding-bottom-90">
             <div class="bread-shapes">
-                <span class="b-shape-1 item-bounce"><img src="assets/images/img/5.png" alt=""></span>
-                <span class="b-shape-2"><img src="assets/images/img/6.png" alt=""></span>
-                <span class="b-shape-3"><img src="assets/images/img/7.png" alt=""></span>
-                <span class="b-shape-4"><img src="assets/images/img/9.png" alt=""></span>
-                <span class="b-shape-5"><img src="assets/images/shapes/18.png" alt=""></span>
-                <span class="b-shape-6 item-animateOne"><img src="assets/images/img/7.png" alt=""></span>
+                <span class="b-shape-1 item-bounce"><img src="{!!asset('/images/img/5.png')!!}" alt=""></span>
+                <span class="b-shape-2"><img src="{!!asset('/images/img/6.png')!!}" alt=""></span>
+                <span class="b-shape-3"><img src="{!!asset('/images/img/7.png')!!}" alt=""></span>
+                <span class="b-shape-4"><img src="{!!asset('/images/img/9.png')!!}" alt=""></span>
+                <span class="b-shape-5"><img src="{!!asset('/images/shapes/18.png')!!}" alt=""></span>
+                <span class="b-shape-6 item-animateOne"><img src="{!!asset('/images/img/7.png')!!}" alt=""></span>
             </div>
             <div class="container padding-top-120">
                 <div class="row justify-content-center">
@@ -29,12 +29,12 @@
         <!-- shopping-cart -->
         <div class="portfolio-info shopping-cart padding-top-120 padding-bottom-90">
             <div class="shopping-shapes">
-                <span class="ps1"><img src="assets/images/shapes/12.png" alt=""></span>
-                <span class="pss2 item-bounce"><img src="assets/images/shapes/26.png" alt=""></span>
-                <span class="ps3 item-bounce"><img src="assets/images/shapes/7.png" alt=""></span>
-                <span class="ps4"><img src="assets/images/img/32.png" alt=""></span>
-                <span class="pss5"><img src="assets/images/shapes/16.png" alt=""></span>
-                <span class="ps6"><img src="assets/images/shapes/13.png" alt=""></span>
+                <span class="ps1"><img src="{!!asset('/images/shapes/12.png')!!}" alt=""></span>
+                <span class="pss2 item-bounce"><img src="{!!asset('/images/shapes/26.png')!!}" alt=""></span>
+                <span class="ps3 item-bounce"><img src="{!!asset('/images/shapes/7.png')!!}" alt=""></span>
+                <span class="ps4"><img src="{!!asset('/images/img/32.png')!!}" alt=""></span>
+                <span class="pss5"><img src="{!!asset('/images/shapes/16.png')!!}" alt=""></span>
+                <span class="ps6"><img src="{!!asset('/images/shapes/13.png')!!}" alt=""></span>
             </div>
             <div class="container">
                 <form action="#">
@@ -76,7 +76,7 @@
                                         <div class="d-flex align-items-center">
                                             <!--class="row"-->
                                             <div class=" d-none d-md-block col-md-4">
-                                                <div class="table-img"><img src="assets/images/menu-item/c1.png" alt="">
+                                                <div class="table-img"><img src="{!!asset('/images/menu-item/c1.png')!!}" alt="">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-12 col-md-8">
@@ -103,7 +103,7 @@
                                         <div class="d-flex align-items-center">
                                             <!--class="row"-->
                                             <div class="d-none d-md-block col-md-4">
-                                                <div class="table-img"><img src="assets/images/menu-item/c2.png" alt="">
+                                                <div class="table-img"><img src="{!!asset('/images/menu-item/c2.png')!!}" alt="">
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-12">
@@ -129,7 +129,7 @@
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="d-none d-md-block col-md-4">
-                                                <div class="table-img"><img src="assets/images/menu-item/c3.png" alt="">
+                                                <div class="table-img"><img src="{!!asset('/images/menu-item/c3.png')!!}" alt="">
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-8">
