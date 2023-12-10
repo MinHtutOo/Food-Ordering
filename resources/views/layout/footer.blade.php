@@ -37,29 +37,15 @@
     </div>
     <div class="footer-bottom padding-top-22 padding-bottom-30">
       <div class="container">
-        <div class="row">
+        <div class="row justify-content-evenly">
           <div class="col-lg-3 col-md-6 col-12 margin-bottom-20">
             <div class="widget">
-              <h6>address</h6>
-              <p>570 8th Ave,New York, NY 10018 United States</p>
-              <a href="#" class="f-link">view google map</a>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-12 margin-bottom-20">
-            <div class="widget">
-              <h6>book a table</h6>
-              <p>Dogfood och Sliders foodtruck. Under Om oss kan ni läsa</p>
-              <a href="#" class="f-link">make a call</a>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-12 margin-bottom-20">
-            <div class="widget">
-              <h6>opening hours</h6>
-              <p>
+              <h6>Eat Healthy Stay Young</h6>
+              {{-- <p>
                 <span>monday-friday: 8am - 4pm</span> <br /><span>saturday: 9am - 5pm</span>
-              </p>
+              </p> --}}
 
-              <a href="#" class="f-link">make a call</a>
+              <a href="#" class="f-link">order now</a>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-12 margin-bottom-20">

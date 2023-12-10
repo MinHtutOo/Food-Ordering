@@ -37,7 +37,7 @@
                 <span class="ps6"><img src="{!!asset('/images/shapes/13.png')!!}" alt=""></span>
             </div>
             <div class="container">
-                <form action="#">
+                <form action="{{url('user/checkout')}}">
                     <!-- upper table -->
                     <div class="upper-table margin-bottom-30">
                         <div class="row">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\Resturant\RestaurantController;
@@ -38,6 +39,12 @@ Route::post('user/login', [AuthenticationController::class, 'authenticate']);
 Route::get('user/signup', [AuthenticationController::class, 'create']);
 Route::post('user/signup', [AuthenticationController::class, 'update']);
 
+Route::get('admin/index', [AdminController::class, 'index']);
+Route::get('admin/role', [AdminController::class, 'showAllRole']);
+Route::get('admin/permission', [AdminController::class, 'givePermission']);
+Route::get('admin/customers', [AdminController::class, 'showCustomerList']);
+Route::get('admin/owners', [AdminController::class, 'showOwnerList']);
+
 Route::get('user/cart', [UserController::class, 'addToCart']);
 
 Route::get('user/checkout', [UserController::class, 'checkout']);
@@ -45,8 +52,9 @@ Route::get('user/checkout', [UserController::class, 'checkout']);
 Route::get('user/profile', [UserController::class, 'viewProfile']);
 
 Route::get('restaurant/index', [RestaurantController::class, 'showAllRestaurant']);
-
 Route::get('restaurant/menu', [RestaurantController::class, 'showMenu']);
+Route::get('restaurant/detail', [RestaurantController::class, 'showDetail']);
+Route::get('restaurant/order', [RestaurantController::class, 'showOrder']);
 
 Route::get('/signup', function (){
     return view('signup');

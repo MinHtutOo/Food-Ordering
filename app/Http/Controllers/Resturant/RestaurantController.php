@@ -16,4 +16,15 @@ class RestaurantController extends Controller
     {
         return view('backend.restaurant.menu');
     }
+
+    public function showDetail()
+    {
+        return view('backend.restaurant.detail');
+    }
+
+    public function showOrder()
+    {
+        return view('backend.restaurant.orderList');
+    }
+
 }

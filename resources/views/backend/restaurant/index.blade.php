@@ -16,10 +16,10 @@
         <div class="container padding-top-120">
             <div class="row justify-content-center">
                 <nav aria-label="breadcrumb">
-                    <h2 class="page-title">food shop</h2>
+                    <h2 class="page-title">Restaurants List</h2>
                     <ol class="breadcrumb text-center">
                         <li class="breadcrumb-item"><a href="index.html">Home</a> / <a href="index.html"> page</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">food shop</li>
+                        <li class="breadcrumb-item active" aria-current="page">Restaurants List</li>
                     </ol>
                 </nav>
             </div>
@@ -77,7 +77,7 @@
                                     <img src="{!!asset('/images/menu-item/pd3.png')!!}" style="width: inherit;" alt="">
                                 </div>
                                 <div class="dish-content">
-                                    <h5> <a href="single-food.html">Chicken Recipe
+                                    <h5> <a href="{{url('restaurant/menu')}}">Chicken Recipe
                                         </a></h5>
                                     <p>It is a long established fact that a reader BBQ food Chicken.</p>
                                     <span class="price badge-color">price :$15.00</span>

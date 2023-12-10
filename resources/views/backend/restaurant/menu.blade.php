@@ -36,7 +36,7 @@
                         <img src="{!!asset('/images/menu-item/menu2.png')!!}" alt="">
                         <h6>Super Fast Delivery</h6>
                         <p>Free Delivery in you Location</p>
-                        <a href="shopping-cart.html">Order Now</a>
+                        <a href="{{url('user/cart')}}">Order Now</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -176,7 +176,7 @@
                                                 <img src="{!!asset('/images/menu-item/tc6.png')!!}" alt="">
                                             </div>
                                             <div class="menu-content">
-                                                <h6><a href="single-dish.html">Fried Chicken</a></h6>
+                                                <h6><a href="{{url('restaurant/detail')}}">Fried Chicken</a></h6>
                                                 <p>shirmp. squid, pineapple</p>
                                                 <span>price :$10.00</span>
                                             </div>
