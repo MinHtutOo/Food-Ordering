@@ -70,9 +70,19 @@
                 <div class="col-lg-6 col-md-12 wow fadeInUp">
                     <div class="contact-form-area login-form-area signup-form-area">
                         <h3>login to <span>your account</span></h3>
-                        <form action="#">
-                            <input type="email" name="email" placeholder="Email">
-                            <input type="password" name="password" placeholder="Password">
+                        <form method="POST" action="{{url('user/login')}}">
+                            @csrf 
+
+                            <input type="email" placeholder="Email" name="email">
+                            @error('email')
+                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            @enderror
+
+                            <input type="password"placeholder="Password" name="password">
+                            @error('password')
+                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            @enderror
+
                             <div class="login-btn">
                                 <button type="submit" class="btn">login account</button>
                                 <span>Don't have an account? <a href="{{url('user/signup')}}">Signup here </a></span>

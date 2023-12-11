@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterFormRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,10 +31,6 @@ class AuthenticationController extends Controller
     public function store(RegisterFormRequest $request)
     {
 
-        //Hash Password
-        $hash= bcrypt($request->get('password'));
-
-        //Creating user
         $user = User::create([
             'name' => $request->input('name'),
             'phone' => $request->input('phone'),
@@ -86,9 +83,14 @@ class AuthenticationController extends Controller
         return view('backend.user.login');
     }
 
-    public function authenticate()
+    public function authenticate(LoginRequest $request)
     {
-        return view('/');
+        $authenticate = $request->only('email','password');
+
+        if (auth()->attempt($authenticate)) {
+            return redirect()->intended('/');
+        }
+        return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
     }
 
 }

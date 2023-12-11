@@ -96,8 +96,11 @@
               <span>
                 <a href="{{url('user/cart')}}"><i class="fas fa-shopping-basket"></i></a>
               </span>
-              {{-- note use condition to logout --}}
-              <a href="{{url('user/login')}}" class="btn">login</a>
+              @auth
+                <a href="{{url('user/login')}}" class="btn">logout</a>
+              @else
+                <a href="{{url('user/login')}}" class="btn">login</a>
+              @endauth
             </div>
           </div>
         </div>
