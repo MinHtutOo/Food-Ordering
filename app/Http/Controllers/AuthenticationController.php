@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterFormRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthenticationController extends Controller
@@ -25,9 +27,26 @@ class AuthenticationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RegisterFormRequest $request)
     {
-        //
+
+        //Hash Password
+        $hash= bcrypt($request->get('password'));
+
+        //Creating user
+        $user = User::create([
+            'name' => $request->input('name'),
+            'phone' => $request->input('phone'),
+            'address' => $request->input('address'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+        ]);
+
+        $user->save();
+
+        // auth()->login($user);
+
+        return redirect("user/login");
     }
 
     /**
@@ -49,7 +68,7 @@ class AuthenticationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,string $id)
     {
         //
     }

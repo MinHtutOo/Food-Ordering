@@ -70,23 +70,39 @@
                 <div class="col-lg-6 col-md-12 wow fadeInUp">
                     <div class="contact-form-area login-form-area signup-form-area">
                         <h3>Signup <span>now</span></h3>
-                        <form action="#">
-                            <div class="google-button">
-                                <a href="#" class="btn"><span><i class="fab fa-google"></i></span> google</a>
-                            </div>
-                            <input type="text" placeholder="name">
-                            <input type="email" placeholder="email">
-                            <input type="password" placeholder="password">
-                            <input type="password" placeholder="confirm password">
-                            <div class="checkbox-area">
-                                <div class="checkbox-part">
-                                    <input type="checkbox" id="remember">
-                                    <label for="remember">remember me</label>
-                                </div>
-                                <div class="forgot-pas">
-                                    <a href="#">forgot password?</a>
-                                </div>
-                            </div>
+                        <form method="post" action="{{url('user/signup')}}">
+                            @csrf
+
+                            <input type="text" placeholder="name" name="name" value="{{old('name')}}">
+                            @error('name')
+                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            @enderror
+
+                            <input type="tel" placeholder="phone(optional)" name="phone" value="{{old('phone')}}">
+                            @error('phone')
+                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            @enderror
+
+                            <input type="text" placeholder="address(optional)" name="address" value="{{old('address')}}">
+                            @error('address')
+                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            @enderror
+
+                            <input type="email" placeholder="email" name="email" value="{{old('email')}}">
+                            @error('email')
+                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            @enderror
+
+                            <input type="password" placeholder="password" name="password" value="{{old('password_confirmation')}}">
+                            @error('password')
+                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            @enderror
+
+                            <input type="password" placeholder="confirm password" name="password_confirmation" value="{{old('password_confirmation')}}">
+                            @error('password_confirmation')
+                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            @enderror
+
                             <div class="login-btn">
                                 <button type="submit" class="btn">login account</button>
                                 <span>already have an account? <a href="{{url('user/login')}}">login</a></span>

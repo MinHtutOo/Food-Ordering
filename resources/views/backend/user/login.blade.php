@@ -71,20 +71,8 @@
                     <div class="contact-form-area login-form-area signup-form-area">
                         <h3>login to <span>your account</span></h3>
                         <form action="#">
-                            <div class="google-button">
-                                <a href="#" class="btn"><span><i class="fab fa-google"></i></span> google</a>
-                            </div>
                             <input type="email" name="email" placeholder="Email">
                             <input type="password" name="password" placeholder="Password">
-                            <div class="checkbox-area">
-                                <div class="checkbox-part">
-                                    <input type="checkbox" id="remember">
-                                    <label for="remember">remember me</label>
-                                </div>
-                                <div class="forgot-pas">
-                                    <a href="#">forgot password?</a>
-                                </div>
-                            </div>
                             <div class="login-btn">
                                 <button type="submit" class="btn">login account</button>
                                 <span>Don't have an account? <a href="{{url('user/signup')}}">Signup here </a></span>

@@ -37,7 +37,7 @@ Route::get('user/login', [AuthenticationController::class, 'login']);
 Route::post('user/login', [AuthenticationController::class, 'authenticate']);
 
 Route::get('user/signup', [AuthenticationController::class, 'create']);
-Route::post('user/signup', [AuthenticationController::class, 'update']);
+Route::post('user/signup', [AuthenticationController::class, 'store']);
 
 Route::get('admin/index', [AdminController::class, 'index']);
 Route::get('admin/role', [AdminController::class, 'showAllRole']);

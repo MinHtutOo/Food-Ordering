@@ -76,20 +76,11 @@
                                     <li class="uppercase"><b>subtotal</b></li>
                                     <li><b>$5,699</b></li>
                                 </ul>
-                                <ul>
-                                    <li class="uppercase"><b>Perched</b></li>
-                                    <li>Flat rate: $5.00</li>
-                                    <li>Bank Transfer</li>
-                                    <li>free</li>
-                                </ul>
                                 <ul class="bg-white">
                                     <li class="uppercase">total</li>
                                     <li class="total"><b>$5,699</b></li>
                                 </ul>
                             </div>
-                            <input type="radio" id="bank">
-                            <label for="bank">DIRECT BANK TRANSFER</label>
-                            <br>
                             <input type="radio" id="check">
                             <label for="check">CHECK PAYMENTS</label>
                             <br>
