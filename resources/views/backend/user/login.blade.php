@@ -73,12 +73,12 @@
                         <form method="POST" action="{{url('user/login')}}">
                             @csrf 
 
-                            <input type="email" placeholder="Email" name="email">
+                            <input type="email" placeholder="Email" name="email" value="{{old('email')}}">
                             @error('email')
                                 <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                             @enderror
 
-                            <input type="password"placeholder="Password" name="password">
+                            <input type="password" placeholder="Password" name="password" value="{{old('password')}}">
                             @error('password')
                                 <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                             @enderror

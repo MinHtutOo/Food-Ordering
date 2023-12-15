@@ -41,7 +41,7 @@ class AuthenticationController extends Controller
 
         $user->save();
 
-        // auth()->login($user);
+        auth()->login($user);
 
         return redirect("user/login");
     }
@@ -73,9 +73,14 @@ class AuthenticationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        auth()->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 
     public function login() 
@@ -85,12 +90,16 @@ class AuthenticationController extends Controller
 
     public function authenticate(LoginRequest $request)
     {
-        $authenticate = $request->only('email','password');
+        $authenticate = $request->only('email', 'password');
 
         if (auth()->attempt($authenticate)) {
-            return redirect()->intended('/');
+            $request->session()->regenerate();
+
+            $user = auth()->user();
+
+            return redirect('user/profile');
         }
-        return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
+        return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
     }
 
 }

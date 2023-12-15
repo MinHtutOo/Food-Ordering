@@ -87,9 +87,6 @@
           </div>
           <div class="col-lg-4 col-md-9 col-8">
             <div class="customer-area">
-              {{-- <span>
-                <a href="wishlist.html"><i class="fas fa-heart"></i></a>
-              </span> --}}
               <span>
                 <a href="{{url('user/profile')}}"><i class="fas fa-user"></i></a>
               </span>
@@ -97,7 +94,13 @@
                 <a href="{{url('user/cart')}}"><i class="fas fa-shopping-basket"></i></a>
               </span>
               @auth
-                <a href="{{url('user/login')}}" class="btn">logout</a>
+                <form method="POST" action="{{url('logout')}}" style="display:inline-block;">
+                  @csrf
+                  <button class="btn">
+                    Logout
+                  </button>
+                </form>
+                {{-- <a href="" class="btn">logout</a> --}}
               @else
                 <a href="{{url('user/login')}}" class="btn">login</a>
               @endauth

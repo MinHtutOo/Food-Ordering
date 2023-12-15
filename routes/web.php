@@ -39,6 +39,8 @@ Route::post('user/login', [AuthenticationController::class, 'authenticate']);
 Route::get('user/signup', [AuthenticationController::class, 'create']);
 Route::post('user/signup', [AuthenticationController::class, 'store']);
 
+Route::post('logout', [AuthenticationController::class, 'destroy']);
+
 Route::get('admin/index', [AdminController::class, 'index']);
 Route::get('admin/role', [AdminController::class, 'showAllRole']);
 Route::get('admin/permission', [AdminController::class, 'givePermission']);
