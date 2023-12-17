@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin;
+use App\Http\Controllers\User;
 use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\Resturant\RestaurantController;
+use App\Http\Controllers\Restaurant;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,24 +39,33 @@ Route::post('user/login', [AuthenticationController::class, 'authenticate']);
 Route::get('user/signup', [AuthenticationController::class, 'create']);
 Route::post('user/signup', [AuthenticationController::class, 'store']);
 
-Route::post('logout', [AuthenticationController::class, 'destroy']);
+Route::post('logout', [AuthenticationController::class, 'logout']);
 
-Route::get('admin/index', [AdminController::class, 'index']);
-Route::get('admin/role', [AdminController::class, 'showAllRole']);
-Route::get('admin/permission', [AdminController::class, 'givePermission']);
-Route::get('admin/customers', [AdminController::class, 'showCustomerList']);
-Route::get('admin/owners', [AdminController::class, 'showOwnerList']);
+Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
+    Route::get('/', [Admin\AdminController::class, 'adminLogin']);
+    Route::post('/', [Admin\AdminController::class, 'adminAuthenticate']);
 
-Route::get('user/cart', [UserController::class, 'addToCart']);
+    Route::group(['middleware' => ['auth']], function () {
+        Route::post('logout', [Admin\AdminController::class, 'adminLogout']);
+        Route::get('dashboard', [Admin\AdminController::class, 'index'])->name('dashboard');
+        Route::get('role', [Admin\AdminController::class, 'showAllRole']);
+        Route::get('permission', [Admin\AdminController::class, 'givePermission']);
+        Route::get('customers', [Admin\AdminController::class, 'showCustomerList']);
+        Route::get('owners', [Admin\AdminController::class, 'showOwnerList']);
+    });
+    
+});
 
-Route::get('user/checkout', [UserController::class, 'checkout']);
+Route::get('user/cart', [User\UserController::class, 'addToCart']);
 
-Route::get('user/profile', [UserController::class, 'viewProfile']);
+Route::get('user/checkout', [User\UserController::class, 'checkout']);
 
-Route::get('restaurant/index', [RestaurantController::class, 'showAllRestaurant']);
-Route::get('restaurant/menu', [RestaurantController::class, 'showMenu']);
-Route::get('restaurant/detail', [RestaurantController::class, 'showDetail']);
-Route::get('restaurant/order', [RestaurantController::class, 'showOrder']);
+Route::get('user/profile', [User\UserController::class, 'viewProfile']);
+
+Route::get('restaurant/index', [Restaurant\RestaurantController::class, 'showAllRestaurant']);
+Route::get('restaurant/menu', [Restaurant\RestaurantController::class, 'showMenu']);
+Route::get('restaurant/detail', [Restaurant\RestaurantController::class, 'showDetail']);
+Route::get('restaurant/order', [Restaurant\RestaurantController::class, 'showOrder']);
 
 Route::get('/signup', function (){
     return view('signup');

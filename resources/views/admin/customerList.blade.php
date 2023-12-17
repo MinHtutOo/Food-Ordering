@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>User Roles | Start Bootstrap</title>
+    <title>Tables | Start Bootstrap</title>
 
     <link href="{!!asset('/vendor/bootstrap4/css/bootstrap.min.css')!!}" rel="stylesheet">
     <link href="{!!asset('/vendor/DataTables/datatables.min.css')!!}" rel="stylesheet">
@@ -43,7 +43,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="settings.html"><i class="fas fa-cog"></i>Restaurants List</a>
+                    <a href="{{url('restaurant/index')}}"><i class="fas fa-cog"></i>Restaurants List</a>
                 </li>
                 <li>
                     <a href="{{url('restaurant/order')}}"><i class="fas fa-file-alt"></i> Order List</a>
@@ -96,91 +96,54 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="page-title">
-                        <h3>User Roles
-                            <a href="roles.html" class="btn btn-sm btn-outline-primary float-right"><i class="fas fa-plus-circle"></i> Add</a>
-                        </h3>
+                        <h3>Customers List</h3>
                     </div>
-                    <div class="box box-primary">
-                        <div class="box-body">
-                            <table width="100%" class="table table-hover" id="dataTables-example">
-                                <thead>
-                                    <tr>
-                                        <th>Role Name</th>
-                                        <th>Status</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Administrator</td>
-                                        <td>Active</td>
-                                        <td class="text-right">
-                                            <a href="{{url('admin/permission')}}" class="btn btn-outline-secondary btn-rounded"><i class="fas fa-toggle-on"></i></a>
-                                            <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                                            <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Manager</td>
-                                        <td>Active</td>
-                                        <td class="text-right">
-                                            <a href="permissions.html" class="btn btn-outline-secondary btn-rounded"><i class="fas fa-toggle-on"></i></a>
-                                            <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                                            <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Writer</td>
-                                        <td>Active</td>
-                                        <td class="text-right">
-                                            <a href="permissions.html" class="btn btn-outline-secondary btn-rounded"><i class="fas fa-toggle-on"></i></a>
-                                            <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                                            <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Editor</td>
-                                        <td>Disabled</td>
-                                        <td class="text-right">
-                                            <a href="permissions.html" class="btn btn-outline-secondary btn-rounded"><i class="fas fa-toggle-on"></i></a>
-                                            <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                                            <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Audit</td>
-                                        <td>Active</td>
-                                        <td class="text-right">
-                                            <a href="permissions.html" class="btn btn-outline-secondary btn-rounded"><i class="fas fa-toggle-on"></i></a>
-                                            <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                                            <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Contributor</td>
-                                        <td>Active</td>
-                                        <td class="text-right">
-                                            <a href="permissions.html" class="btn btn-outline-secondary btn-rounded"><i class="fas fa-toggle-on"></i></a>
-                                            <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                                            <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Author</td>
-                                        <td>Active</td>
-                                        <td class="text-right">
-                                            <a href="permissions.html" class="btn btn-outline-secondary btn-rounded"><i class="fas fa-toggle-on"></i></a>
-                                            <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                                            <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Phone</th>
+                                                <th scope="col">Address</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                                <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                                <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Larry the Bird</td>
+                                                <td>Gogles</td>
+                                                <td>@twitter</td>
+                                                <td>@mdo</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 

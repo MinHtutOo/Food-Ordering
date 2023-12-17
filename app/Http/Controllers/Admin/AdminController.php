@@ -2,38 +2,70 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
+    public function adminLogin()
+    {
+        return view('admin.login');
+    }
+
+    public function adminAuthenticate(Request $request)
+    {
+        try{
+            $authenticate = $request->only('email', 'password');
+            // dd($authenticate);
+            if (auth()->attempt($authenticate)) {
+                $request->session()->regenerate();
+
+                $user = auth()->user();
+                // dd($user);
+                return redirect('admin/dashboard');
+            }
+        }
+        catch(Exception $e) {
+            return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
+        } 
+    }
+
+    public function adminLogout(Request $request)
+    {
+        auth()->logout();
+
+        return redirect('/');
+    }
+
     public function index()
     {
-        return view('backend.admin.index');
+        return view('admin.dashboard');
     }
 
     public function showAllRole()
     {
-        return view('backend.admin.role');
+        return view('admin.role');
     }
 
     public function givePermission()
     {
-        return view('backend.admin.permission');
+        return view('admin.permission');
     }
 
     public function showCustomerList()
     {
-        return view('backend.admin.customerList');
+        return view('admin.customerList');
     }
 
     public function showOwnerList()
     {
-        return view('backend.admin.ownerList');
+        return view('admin.ownerList');
     }
 
     public function showOrderList()
     {
-        return view('backend.admin.orderList');
+        return view('admin.orderList');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterFormRequest;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 
 class AuthenticationController extends Controller
@@ -30,62 +31,33 @@ class AuthenticationController extends Controller
      */
     public function store(RegisterFormRequest $request)
     {
+        try{
+            $user = User::create([
+                'name' => $request->input('name'),
+                'phone' => $request->input('phone'),
+                'address' => $request->input('address'),
+                'email' => $request->input('email'),
+                'password' => bcrypt($request->input('password')),
+            ]);
 
-        $user = User::create([
-            'name' => $request->input('name'),
-            'phone' => $request->input('phone'),
-            'address' => $request->input('address'),
-            'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
-        ]);
+            auth()->login($user);
 
-        $user->save();
-
-        auth()->login($user);
-
-        return redirect("user/login");
+            return redirect("user/login");
+        }catch(Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => 'User creation failed. Please try again.']);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request,string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Request $request)
+    public function logout(Request $request)
     {
         auth()->logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
 
         return redirect('/');
     }
 
     public function login() 
     {
-        return view('backend.user.login');
+        return view('user.login');
     }
 
     public function authenticate(LoginRequest $request)

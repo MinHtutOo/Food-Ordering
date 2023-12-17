@@ -37,7 +37,7 @@
                             data-bs-target="#dahoboard" type="button" role="tab" aria-controls="dahoboard"
                             aria-selected="true">
                             <i class="fa-solid fa-sliders inline-block"></i>
-                            Dashboard
+                            Profile
                         </button>
                         <button class="nav-link text-start" id="order-tab" data-bs-toggle="pill" data-bs-target="#order"
                             type="button" role="tab" aria-controls="order" aria-selected="false">
@@ -70,7 +70,7 @@
                         <!-- dahoboard-tab -->
                         <div class="tab-pane fade show active" id="dahoboard" role="tabpanel"
                             aria-labelledby="dahoboard-tab" tabindex="0">
-                            <h5 class="tab-title">Hello <span>Alex!</span> </h5>
+                            <h5 class="tab-title">Hello <span>{{auth()->user()->name}}</span> </h5>
                             <p>
                                 From your account dashboard. you can easily check &amp; view your recent
                                 orders,<br> manage your shipping and billing addresses and edit your password and
@@ -301,15 +301,15 @@
                                     <h5 class="tab-title">Account Details</h5>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="userName">
+                                        <input type="text" class="form-control" id="userName" name="name" value="{{auth()->user()->name}}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="userPhone" class="form-label">Phone Number</label>
-                                        <input type="text" class="form-control" id="userPhone">
+                                        <input type="text" class="form-control" id="userPhone" name="phone" value="{{auth()->user()->phone}}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="text" class="form-control" id="email">
+                                        <input type="text" class="form-control" id="email" name="email" value="{{auth()->user()->email}}">
                                     </div>
                                 </div>
                                 <!-- password-change -->

@@ -44,7 +44,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="settings.html"><i class="fas fa-cog"></i>Restaurants List</a>
+                    <a href="{{url('restaurant/index')}}"><i class="fas fa-cog"></i>Restaurants List</a>
                 </li>
                 <li>
                     <a href="{{url('restaurant/order')}}"><i class="fas fa-file-alt"></i> Order List</a>
@@ -80,12 +80,20 @@
                         </li>
                         <li class="nav-item dropdown">
                             <div class="nav-dropdown">
-                                <a href="" class="nav-item nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-user"></i> <span>John Doe</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
+                                <a href="" class="nav-item nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-user"></i> <span>{{auth()->user()->name}}</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right nav-link-menu">
                                     <ul class="nav-list">
                                         <li><a href="{{url('user/profile')}}" class="dropdown-item"><i class="fas fa-address-card"></i> Profile</a></li>
                                         <div class="dropdown-divider"></div>
-                                        <li><a href="" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                                        {{-- <li><a href="" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a></li> --}}
+                                        <li>
+                                            <form method="POST" action="{{url('admin/logout')}}" style="display:inline-block;">
+                                                @csrf
+                                                <button class="btn" style="color: #888">
+                                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                                </button>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

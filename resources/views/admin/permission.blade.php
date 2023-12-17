@@ -12,10 +12,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Tables | Start Bootstrap</title>
+    <title>User Permissions | Start Bootstrap</title>
 
     <link href="{!!asset('/vendor/bootstrap4/css/bootstrap.min.css')!!}" rel="stylesheet">
-    <link href="{!!asset('/vendor/DataTables/datatables.min.css')!!}" rel="stylesheet">
     <link href="{!!asset('/css/master.css')!!}" rel="stylesheet">
 </head>
 
@@ -43,7 +42,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="settings.html"><i class="fas fa-cog"></i>Restaurants List</a>
+                    <a href="{{url('restaurant/index')}}"><i class="fas fa-cog"></i>Restaurants List</a>
                 </li>
                 <li>
                     <a href="{{url('restaurant/order')}}"><i class="fas fa-file-alt"></i> Order List</a>
@@ -96,50 +95,59 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="page-title">
-                        <h3>Owners List</h3>
+                        <h3>User Permissions
+                            <a href="{{url('admin/role')}}" class="btn btn-sm btn-outline-info float-right"><i class="fas fa-angle-left"></i> <span class="btn-header">Return</span></a>
+                        </h3>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                    <table class="table table-sm">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Phone</th>
-                                                <th scope="col">Address</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Larry the Bird</td>
-                                                <td>Gogles</td>
-                                                <td>@twitter</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <form accept-charset="utf-8">
+                                <div class="form-group">
+                                    <label for="email" class="text-uppercase"><small>Dashboard</small></label>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="switch1">
+                                        <label class="custom-control-label" for="switch1">Open dashboard page</label>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <label for="email" class="text-uppercase"><small>Users</small></label>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="switch2">
+                                        <label class="custom-control-label" for="switch2">Add User</label>
+                                    </div>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="switch3">
+                                        <label class="custom-control-label" for="switch3">Edit User</label>
+                                    </div>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="switch4">
+                                        <label class="custom-control-label" for="switch4">Delete User</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="text-uppercase"><small>Roles & Permissions</small></label>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="switch5">
+                                        <label class="custom-control-label" for="switch5">Add Roles</label>
+                                    </div>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="switch6">
+                                        <label class="custom-control-label" for="switch6">Edit Roles</label>
+                                    </div>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="switch7">
+                                        <label class="custom-control-label" for="switch7">Delete Roles</label>
+                                    </div>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="switch8">
+                                        <label class="custom-control-label" for="switch8">Update Permissions</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Save</button>
+                            <a href="roles.html" class="btn btn-secondary"><i class="fas fa-times"></i> Cancel</a>
                         </div>
                     </div>
                 </div>
@@ -149,12 +157,10 @@
 
     <script src="{!!asset('/vendor/jquery3/jquery-3.4.1.min.js')!!}"></script>
     <script src="{!!asset('/vendor/bootstrap4/js/bootstrap.bundle.min.js')!!}"></script>
-    <script src="{!!asset('/vendor/DataTables/datatables.min.js')!!}"></script>
     <script src="{!!asset('/vendor/fontawesome5/js/solid.min.js')!!}"></script>
     <script src="{!!asset('/vendor/fontawesome5/js/fontawesome.min.js')!!}"></script>
-    <script src="{!!asset('/js/initiate-datatables.js')!!}"></script>
     <script src="{!!asset('/js/script.js')!!}"></script>
-
+   
 </body>
 
 </html>
