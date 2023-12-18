@@ -28,7 +28,7 @@
                     </div>
                     <h6 class="mb-4 text-muted">Sign in to your account</h6>
                    
-                    <form action="{{url('admin/login')}}" method="POST">
+                    <form action="{{url('admin')}}" method="POST">
                         @csrf
                         <div class="form-group">
                             <input type="email" class="form-control" placeholder="Email" name="email" required>

@@ -9,22 +9,22 @@ class RestaurantController extends Controller
 {
     public function showAllRestaurant()
     {
-        return view('backend.restaurant.index');
+        return view('restaurant.index');
     }
 
     public function showMenu()
     {
-        return view('backend.restaurant.menu');
+        return view('restaurant.menu');
     }
 
     public function showDetail()
     {
-        return view('backend.restaurant.detail');
+        return view('restaurant.detail');
     }
 
     public function showOrder()
     {
-        return view('backend.restaurant.orderList');
+        return view('restaurant.orderList');
     }
 
 }

@@ -23,7 +23,6 @@ class AdminController extends Controller
                 $request->session()->regenerate();
 
                 $user = auth()->user();
-                // dd($user);
                 return redirect('admin/dashboard');
             }
         }
@@ -36,7 +35,7 @@ class AdminController extends Controller
     {
         auth()->logout();
 
-        return redirect('/');
+        return redirect('admin');
     }
 
     public function index()
@@ -47,6 +46,11 @@ class AdminController extends Controller
     public function showAllRole()
     {
         return view('admin.role');
+    }
+
+    public function createRole()
+    {
+        return view('admin.createRole');
     }
 
     public function givePermission()

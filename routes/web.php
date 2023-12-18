@@ -48,7 +48,11 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::post('logout', [Admin\AdminController::class, 'adminLogout']);
         Route::get('dashboard', [Admin\AdminController::class, 'index'])->name('dashboard');
+
         Route::get('role', [Admin\AdminController::class, 'showAllRole']);
+        Route::get('role/create', [Admin\AdminController::class, 'createRole']);
+        Route::post('role/create', [Admin\AdminController::class, 'storeRole']);
+        
         Route::get('permission', [Admin\AdminController::class, 'givePermission']);
         Route::get('customers', [Admin\AdminController::class, 'showCustomerList']);
         Route::get('owners', [Admin\AdminController::class, 'showOwnerList']);
