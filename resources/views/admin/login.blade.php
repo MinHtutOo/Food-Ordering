@@ -1,24 +1,8 @@
-<!doctype html>
-<!-- 
-* Bootstrap Simple Admin Template
-* Email: heyalexluna@gmail.com
-* Version: 1.1
-* Author: Alexis Luna
-* Copyright 2019 Alexis Luna
-* Website: https://github.com/mralexisluna/bootstrap-simple-admin-template
--->
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin Login</title>
+@extends('layout.form')
 
-    <link href="{!!asset('/vendor/bootstrap4/css/bootstrap.min.css')!!}" rel="stylesheet">
-    <link href="{!!asset('/css/auth.css')!!}" rel="stylesheet">
-    
-</head>
-<body>
+@section('title', 'Admin Login')
+
+@section('content')
     <div class="wrapper">
         <div class="auth-content">
             <div class="card">
@@ -28,7 +12,7 @@
                     </div>
                     <h6 class="mb-4 text-muted">Sign in to your account</h6>
                    
-                    <form action="{{url('admin/login')}}" method="POST">
+                    <form action="{{url('admin')}}" method="POST">
                         @csrf
                         <div class="form-group">
                             <input type="email" class="form-control" placeholder="Email" name="email" required>
@@ -48,9 +32,6 @@
             </div>
         </div>
     </div>
+@endsection
     
-    <script src="{!!asset('/vendor/jquery3/jquery-3.4.1.min.js')!!}"></script>
-    <script src="{!!asset('/vendor/bootstrap4/js/bootstrap.min.js')!!}"></script>
-
-</body>
-</html>
+    

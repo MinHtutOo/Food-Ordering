@@ -36,5 +36,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'jack@gmail.com',      
         ]);
         $user->assignRole('admin');
+
+        $this->call([
+            PermissionsSeeder::class,
+            UserSeeder::class,
+        ]);
     }
 }

@@ -48,10 +48,18 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::post('logout', [Admin\AdminController::class, 'adminLogout']);
         Route::get('dashboard', [Admin\AdminController::class, 'index'])->name('dashboard');
-        Route::get('role', [Admin\AdminController::class, 'showAllRole']);
-        Route::get('permission', [Admin\AdminController::class, 'givePermission']);
         Route::get('customers', [Admin\AdminController::class, 'showCustomerList']);
         Route::get('owners', [Admin\AdminController::class, 'showOwnerList']);
+
+        Route::get('role', [Admin\RoleController::class, 'index'])->name('role.index');
+        Route::get('role/create', [Admin\RoleController::class, 'create'])->name('role.create');
+        Route::post('role/create', [Admin\RoleController::class, 'store'])->name('role.store');
+        Route::get('role/{id}/edit', [Admin\RoleController::class, 'edit'])->name('role.edit');
+        Route::put('role/{id}/update', [Admin\RoleController::class, 'update'])->name('role.update');
+        Route::delete('role/{id}/destroy', [Admin\RoleController::class, 'destroy'])->name('role.destroy');
+
+        Route::get('{id}/permission', [Admin\RoleController::class, 'permission'])->name('user.permission');
+        Route::put('{id}/assignPermission', [Admin\RoleController::class, 'assignPermission'])->name('user.assignPermission');
     });
     
 });

@@ -36,22 +36,12 @@ class AdminController extends Controller
     {
         auth()->logout();
 
-        return redirect('/');
+        return redirect('admin');
     }
 
     public function index()
     {
         return view('admin.dashboard');
-    }
-
-    public function showAllRole()
-    {
-        return view('admin.role');
-    }
-
-    public function givePermission()
-    {
-        return view('admin.permission');
     }
 
     public function showCustomerList()
