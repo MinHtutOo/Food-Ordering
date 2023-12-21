@@ -45,7 +45,15 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{url('restaurant/index')}}"><i class="fas fa-cog"></i>Restaurants List</a>
+                    <a href="#pagesmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-user-shield"></i> Restaurant</a>
+                    <ul class="collapse list-unstyled" id="pagesmenu">
+                        <li>
+                            <a href="{{url('admin/customers')}}"><i class="fas fa-user-friends"></i>List</a>
+                        </li>
+                        <li>
+                            <a href="{{url('admin/owners')}}"><i class="fas fa-user-friends"></i>Create</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="{{url('restaurant/order')}}"><i class="fas fa-file-alt"></i> Order List</a>

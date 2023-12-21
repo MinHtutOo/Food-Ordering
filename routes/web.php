@@ -58,11 +58,11 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
         Route::get('{id}/permission', [Admin\RoleController::class, 'permission'])->name('user.permission');
         Route::put('{id}/assignPermission', [Admin\RoleController::class, 'assignPermission'])->name('user.assignPermission');
 
-        Route::get('customers', [Admin\AdminController::class, 'showCustomerList'])->name('customer.list');
-        Route::get('customers/{id}/edit', [Admin\AdminController::class, 'editCustomer'])->name('customer.edit');
-        Route::put('customers/{id}/update', [Admin\AdminController::class, 'updateCustomer'])->name('customer.update');
-        Route::delete('customers/{id}/destroy', [Admin\AdminController::class, 'destroy'])->name('customer.destroy');
-        Route::get('customers/{id}/restore', [Admin\AdminController::class, 'restore'])->name('customer.restore');
+        Route::get('customers', [Customer\CustomerController::class, 'showCustomerList'])->name('customer.list');
+        Route::get('customers/{id}/edit', [Customer\CustomerController::class, 'editCustomer'])->name('customer.edit');
+        Route::put('customers/{id}/update', [Customer\CustomerController::class, 'updateCustomer'])->name('customer.update');
+        Route::delete('customers/{id}/destroy', [Customer\CustomerController::class, 'destroy'])->name('customer.destroy');
+        Route::get('customers/{id}/restore', [Customer\CustomerController::class, 'restore'])->name('customer.restore');
     });
     
 });

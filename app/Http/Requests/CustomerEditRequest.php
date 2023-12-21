@@ -26,6 +26,8 @@ class CustomerEditRequest extends FormRequest
             'phone' => 'sometimes|required',
             'address' => 'sometimes|required',
             'email' => 'sometimes|required|email',
+            'roles' => 'sometimes|array', 
+            'roles.*' => 'sometimes|exists:roles,name',
         ];
     }
 }

@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Customer;
 use Exception;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CustomerEditRequest;
 use App\Http\Requests\RegisterFormRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CustomerController extends Controller
 {
@@ -28,6 +31,8 @@ class CustomerController extends Controller
             ]);
 
             auth()->login($customer);
+
+            $customer->assignRole('Customer');
 
             return redirect()->route('login');
         } catch (Exception $e) {
@@ -64,5 +69,69 @@ class CustomerController extends Controller
         auth()->logout();
 
         return redirect('/');
+    }
+
+    public function showCustomerList()
+    {
+        $customers = Customer::select('id', 'name', 'phone', 'address', 'email')->withTrashed()->get();
+
+        return view('admin.customerList', compact('customers'));
+    }
+
+    public function editCustomer(string $id)
+    {
+        $customer = Customer::findOrFail($id);
+        $roles = Role::select('name')->get();
+        $selectedRoles = $customer->roles()->pluck('name')->toArray();
+        return view('user.edit', compact('customer', 'roles', 'selectedRoles'));
+    }
+
+    public function updateCustomer(CustomerEditRequest $request, string $id)
+    {
+        try{
+            $customer = Customer::findOrFail($id);
+            $customer->name = $request->input('name');
+            $customer->phone = $request->input('phone');
+            $customer->address = $request->input('address');
+            $customer->email = $request->input('email');
+            $customer->save();
+
+            $roleNames = $request->input('roles', []);
+
+            $customer->syncRoles($roleNames);
+
+            return redirect()->route('customer.list')->with('success', 'Customer updated successfully');
+        }catch(ModelNotFoundException $e){
+            return back()->with('error', 'Customer not found');
+        }catch(Exception $e){
+            return back()->with('error', $e->getMessage());
+        }
+
+    }
+
+    public function destroy(string $id)
+    {
+        try{
+            $customer = Customer::findOrFail($id);
+            $customer->delete();
+            return redirect()->route('customer.list')->with('success', 'Customer deleted successfully');
+        }catch(ModelNotFoundException $e){
+            return redirect()->route('customer.list')->with('error', 'Customer not found');
+        }catch(Exception $e){
+            return redirect()->route('customer.list')->with('error', $e->getMessage());
+        }
+    }
+
+    public function restore(string $id)
+    {
+        try{
+            $customer = Customer::onlyTrashed()->findOrFail($id);
+            $customer->restore();
+            return redirect()->route('customer.list')->with('success', 'Customer restored successfully');
+        }catch(ModelNotFoundException $e){
+            return redirect()->route('customer.list')->with('error', 'Customer not found');
+        }catch(Exception $e){
+            return redirect()->route('customer.list')->with('error', $e->getMessage());
+        }
     }
 }
