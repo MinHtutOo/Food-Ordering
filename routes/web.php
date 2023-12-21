@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\User;
-use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\Customer;
 use App\Http\Controllers\Restaurant;
 use Illuminate\Support\Facades\Route;
 
@@ -33,13 +33,11 @@ Route::get('/contact', function (){
     return view('contact');
 });
 
-Route::get('user/login', [AuthenticationController::class, 'login']);
-Route::post('user/login', [AuthenticationController::class, 'authenticate']);
-
-Route::get('user/signup', [AuthenticationController::class, 'create']);
-Route::post('user/signup', [AuthenticationController::class, 'store']);
-
-Route::post('logout', [AuthenticationController::class, 'logout']);
+Route::get('user/login', [Customer\CustomerController::class, 'login'])->name('login');
+Route::post('user/login', [Customer\CustomerController::class, 'authenticate'])->name('auth');
+Route::get('user/signup', [Customer\CustomerController::class, 'create'])->name('signup');
+Route::post('user/signup', [Customer\CustomerController::class, 'store'])->name('store');
+Route::post('logout', [Customer\CustomerController::class, 'logout'])->name('logout');
 
 Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
     Route::get('/', [Admin\AdminController::class, 'adminLogin']);
@@ -48,7 +46,6 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::post('logout', [Admin\AdminController::class, 'adminLogout']);
         Route::get('dashboard', [Admin\AdminController::class, 'index'])->name('dashboard');
-        Route::get('customers', [Admin\AdminController::class, 'showCustomerList']);
         Route::get('owners', [Admin\AdminController::class, 'showOwnerList']);
 
         Route::get('role', [Admin\RoleController::class, 'index'])->name('role.index');
@@ -60,6 +57,12 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
 
         Route::get('{id}/permission', [Admin\RoleController::class, 'permission'])->name('user.permission');
         Route::put('{id}/assignPermission', [Admin\RoleController::class, 'assignPermission'])->name('user.assignPermission');
+
+        Route::get('customers', [Admin\AdminController::class, 'showCustomerList'])->name('customer.list');
+        Route::get('customers/{id}/edit', [Admin\AdminController::class, 'editCustomer'])->name('customer.edit');
+        Route::put('customers/{id}/update', [Admin\AdminController::class, 'updateCustomer'])->name('customer.update');
+        Route::delete('customers/{id}/destroy', [Admin\AdminController::class, 'destroy'])->name('customer.destroy');
+        Route::get('customers/{id}/restore', [Admin\AdminController::class, 'restore'])->name('customer.restore');
     });
     
 });

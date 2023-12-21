@@ -70,7 +70,7 @@
                 <div class="col-lg-6 col-md-12 wow fadeInUp">
                     <div class="contact-form-area login-form-area signup-form-area">
                         <h3>Signup <span>now</span></h3>
-                        <form method="post" action="{{url('user/signup')}}">
+                        <form method="post" action="{{route('store')}}">
                             @csrf
 
                             <input type="text" placeholder="name" name="name" value="{{old('name')}}">
@@ -104,8 +104,8 @@
                             @enderror
 
                             <div class="login-btn">
-                                <button type="submit" class="btn">login account</button>
-                                <span>already have an account? <a href="{{url('user/login')}}">login</a></span>
+                                <button type="submit" class="btn">signup</button>
+                                <span>already have an account? <a href="{{route('login')}}">login</a></span>
                             </div>
                         </form>
                     </div>

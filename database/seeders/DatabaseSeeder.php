@@ -15,30 +15,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $permissions = [
-            'restaurant_list',
-            'restaurant_edit',
-            'restaurant_delete',
-            'restaurant_restore',
-        ];
-        $role = Role::create(['name' => 'admin', 'guard_name' => 'web']);
-        foreach($permissions as $permission) {
-            Permission::create([
-                'name' => $permission, 'guard_name' => 'web'
-            ]);
-        }
-        $permissionId = Permission::pluck('id')->toArray();
-        $role->syncPermissions($permissionId);
-       //  \App\Models\User::factory(1)->create();
+        // $permissions = [
+        //     'restaurant_list',
+        //     'restaurant_edit',
+        //     'restaurant_delete',
+        //     'restaurant_restore',
+        // ];
+        // $role = Role::create(['name' => 'admin', 'guard_name' => 'web']);
+        // foreach($permissions as $permission) {
+        //     Permission::create([
+        //         'name' => $permission, 'guard_name' => 'web'
+        //     ]);
+        // }
+        // $permissionId = Permission::pluck('id')->toArray();
+        // $role->syncPermissions($permissionId);
+        // //  \App\Models\User::factory(1)->create();
 
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'jack@gmail.com',      
-        ]);
-        $user->assignRole('admin');
+        // $user = User::factory()->create([
+        //     'name' => 'admin',
+        //     'email' => 'jack@gmail.com',      
+        // ]);
+        // $user->assignRole('admin');
+        
 
         $this->call([
-            PermissionsSeeder::class,
+            // PermissionsSeeder::class,
             UserSeeder::class,
         ]);
     }

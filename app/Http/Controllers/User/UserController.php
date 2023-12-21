@@ -9,16 +9,16 @@ class UserController extends Controller
 {
     public function addToCart() 
     {
-        return view('backend.user.cart');
+        return view('user.cart');
     }
 
     public function checkout()
     {
-        return view('backend.user.checkout');
+        return view('user.checkout');
     }
 
     public function viewProfile()
     {
-        return view('backend.user.profile');
+        return view('user.profile');
     }
 }
