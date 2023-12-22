@@ -63,6 +63,9 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
         Route::put('customers/{id}/update', [Customer\CustomerController::class, 'updateCustomer'])->name('customer.update');
         Route::delete('customers/{id}/destroy', [Customer\CustomerController::class, 'destroy'])->name('customer.destroy');
         Route::get('customers/{id}/restore', [Customer\CustomerController::class, 'restore'])->name('customer.restore');
+
+        Route::get('restaurants/create', [Restaurant\RestaurantController::class, 'create'])->name('restaurant.create');
+        Route::post('restaurants/create', [Restaurant\RestaurantController::class, 'store'])->name('restaurant.store');
     });
     
 });
