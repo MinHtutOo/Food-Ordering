@@ -56,7 +56,7 @@
                 </li>
                 <li><a href="{{url('about')}}">about us</a></li>
                 <li>
-                  <a href="{{url('/restaurant/index')}}">restaurants</a>
+                  <a href="{{route('restaurants')}}">restaurants</a>
                 </li>
                 <li>
                   <a href="#">pages <span><i class="fas fa-angle-down"></i></span></a>

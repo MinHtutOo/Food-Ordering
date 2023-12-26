@@ -5,8 +5,26 @@
 @section('content') 
     <div class="card bg-light">
         <div class="card-body">
+            @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show">
+                        {{ session('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        {{ session('error') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
             <h5 class="card-title">Create Restaurant</h5>
-            <form action="{{ route('restaurant.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('restaurant.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -38,7 +56,7 @@
                 </div>
                 <div class="form-group">
                     <label for="image">Restaurant Image</label>
-                    <input type="file" name="image[]" class="form-control" multiple>
+                    <input type="file" name="file[]" class="form-control" multiple>
                 </div>
                 <div class="form-group text-right">       
                     <input type="submit" class="btn btn-primary">

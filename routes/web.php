@@ -21,10 +21,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/restaurant/index', function (){
-    return view('menu');
-});
-
 Route::get('/about', function (){
     return view('about');
 });
@@ -33,11 +29,10 @@ Route::get('/contact', function (){
     return view('contact');
 });
 
-Route::get('user/login', [Customer\CustomerController::class, 'login'])->name('login');
-Route::post('user/login', [Customer\CustomerController::class, 'authenticate'])->name('auth');
-Route::get('user/signup', [Customer\CustomerController::class, 'create'])->name('signup');
-Route::post('user/signup', [Customer\CustomerController::class, 'store'])->name('store');
-Route::post('logout', [Customer\CustomerController::class, 'logout'])->name('logout');
+Route::get('restaurant', [Restaurant\RestaurantController::class, 'showAllRestaurant'])->name('restaurants');
+Route::get('menu', [Restaurant\RestaurantController::class, 'showMenu'])->name('menu');
+
+
 
 Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
     Route::get('/', [Admin\AdminController::class, 'adminLogin']);
@@ -64,19 +59,32 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
         Route::delete('customers/{id}/destroy', [Customer\CustomerController::class, 'destroy'])->name('customer.destroy');
         Route::get('customers/{id}/restore', [Customer\CustomerController::class, 'restore'])->name('customer.restore');
 
+        Route::get('restaurants', [Restaurant\RestaurantController::class, 'showRestaurantList'])->name('restaurant.list');
         Route::get('restaurants/create', [Restaurant\RestaurantController::class, 'create'])->name('restaurant.create');
         Route::post('restaurants/create', [Restaurant\RestaurantController::class, 'store'])->name('restaurant.store');
+        Route::get('restaurants/{id}/edit', [Restaurant\RestaurantController::class, 'edit'])->name('restaurant.edit');
+        Route::put('restaurants/{id}/update', [Restaurant\RestaurantController::class, 'update'])->name('restaurant.update');
+        Route::delete('restaurants/{id}/destroy', [Restaurant\RestaurantController::class, 'destroy'])->name('restaurant.destroy');
+        Route::get('restaurants/{id}/restore', [Restaurant\RestaurantController::class, 'restore'])->name('restaurant.restore');
     });
     
 });
 
-Route::get('user/cart', [User\UserController::class, 'addToCart']);
+Route::get('user/login', [Customer\CustomerController::class, 'login'])->name('login');
+Route::post('user/login', [Customer\CustomerController::class, 'authenticate'])->name('auth');
+Route::get('user/signup', [Customer\CustomerController::class, 'create'])->name('signup');
+Route::post('user/signup', [Customer\CustomerController::class, 'store'])->name('store');
 
-Route::get('user/checkout', [User\UserController::class, 'checkout']);
+Route::middleware(['auth:customer'])->group(function () {
+    Route::post('logout', [Customer\CustomerController::class, 'logout'])->name('logout');
+    Route::get('user/cart', [User\UserController::class, 'addToCart']);
+    Route::get('user/checkout', [User\UserController::class, 'checkout']);
+    Route::get('user/profile', [User\UserController::class, 'viewProfile']);
+});
 
-Route::get('user/profile', [User\UserController::class, 'viewProfile']);
 
-Route::get('restaurant/index', [Restaurant\RestaurantController::class, 'showAllRestaurant']);
+
+
 Route::get('restaurant/menu', [Restaurant\RestaurantController::class, 'showMenu']);
 Route::get('restaurant/detail', [Restaurant\RestaurantController::class, 'showDetail']);
 Route::get('restaurant/order', [Restaurant\RestaurantController::class, 'showOrder']);

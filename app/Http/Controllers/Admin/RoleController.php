@@ -80,20 +80,4 @@ class RoleController extends Controller
             return back()->with('error', $e->getMessage());
         }
     }
-
-    private function checkPermission(string $permission, $data = null)
-    {
-        return $this->authorize($permission, $data);
-    }
-
-    public function setPermission(Request $request, string $id)
-    {
-        try{
-            $role = Role::findOrFail($id);
-            $role->syncPermissions($request->input('permission', []));
-            return redirect()->route('role.index');
-        }catch(Exception $e) {
-            return back()->with('error', $e->getMessage());
-        }
-    }
 }
