@@ -81,9 +81,7 @@ class CustomerController extends Controller
     public function editCustomer(string $id)
     {
         $customer = Customer::findOrFail($id);
-        $roles = Role::select('name')->get();
-        $selectedRoles = $customer->roles()->pluck('name')->toArray();
-        return view('user.edit', compact('customer', 'roles', 'selectedRoles'));
+        return view('user.edit', compact('customer'));
     }
 
     public function updateCustomer(CustomerEditRequest $request, string $id)
@@ -95,10 +93,6 @@ class CustomerController extends Controller
             $customer->address = $request->input('address');
             $customer->email = $request->input('email');
             $customer->save();
-
-            $roleNames = $request->input('roles', []);
-
-            $customer->syncRoles($roleNames);
 
             return redirect()->route('customer.list')->with('success', 'Customer updated successfully');
         }catch(ModelNotFoundException $e){
