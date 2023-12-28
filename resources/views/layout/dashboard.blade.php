@@ -48,6 +48,9 @@
                     <a href="#pagesmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-user-shield"></i> Restaurant</a>
                     <ul class="collapse list-unstyled" id="pagesmenu">
                         <li>
+                            <a href="{{url('admin/category')}}"><i class="fas fa-user-friends"></i>Category</a>
+                        </li>
+                        <li>
                             <a href="{{route('restaurant.create')}}"><i class="fas fa-user-friends"></i>Create</a>
                         </li>
                         <li>

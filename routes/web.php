@@ -38,7 +38,7 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
     Route::get('/', [Admin\AdminController::class, 'adminLogin']);
     Route::post('/', [Admin\AdminController::class, 'adminAuthenticate']);
 
-    Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['auth:web']], function () {
         Route::post('logout', [Admin\AdminController::class, 'adminLogout']);
         Route::get('dashboard', [Admin\AdminController::class, 'index'])->name('dashboard');
         Route::get('owners', [Admin\AdminController::class, 'showOwnerList']);
@@ -66,6 +66,15 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
         Route::put('restaurants/{id}/update', [Restaurant\RestaurantController::class, 'update'])->name('restaurant.update');
         Route::delete('restaurants/{id}/destroy', [Restaurant\RestaurantController::class, 'destroy'])->name('restaurant.destroy');
         Route::get('restaurants/{id}/restore', [Restaurant\RestaurantController::class, 'restore'])->name('restaurant.restore');
+
+        Route::get('category', [Restaurant\CategoryController::class, 'index'])->name('category.index');
+        Route::get('category/create', [Restaurant\CategoryController::class, 'create'])->name('category.create');
+        Route::post('category/create', [Restaurant\CategoryController::class, 'store'])->name('category.store');
+        Route::get('category/{id}/edit', [Restaurant\CategoryController::class, 'edit'])->name('category.edit');
+        Route::put('category/{id}/update', [Restaurant\CategoryController::class, 'update'])->name('category.update');
+        Route::delete('category/{id}/destroy', [Restaurant\CategoryController::class, 'destroy'])->name('category.destroy');
+        Route::get('category/{id}/restore', [Restaurant\CategoryController::class, 'restore'])->name('category.restore');
+
     });
     
 });
@@ -81,9 +90,6 @@ Route::middleware(['auth:customer'])->group(function () {
     Route::get('user/checkout', [User\UserController::class, 'checkout']);
     Route::get('user/profile', [User\UserController::class, 'viewProfile']);
 });
-
-
-
 
 Route::get('restaurant/menu', [Restaurant\RestaurantController::class, 'showMenu']);
 Route::get('restaurant/detail', [Restaurant\RestaurantController::class, 'showDetail']);
