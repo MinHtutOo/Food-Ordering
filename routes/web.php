@@ -34,12 +34,13 @@ Route::get('menu', [Restaurant\RestaurantController::class, 'showMenu'])->name('
 
 
 
+
 Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
     Route::get('/', [Admin\AdminController::class, 'adminLogin']);
     Route::post('/', [Admin\AdminController::class, 'adminAuthenticate']);
 
     Route::group(['middleware' => ['auth']], function () {
-        Route::post('logout', [Admin\AdminController::class, 'adminLogout']);
+        Route::post('logout', [Admin\AdminController::class, 'adminLogout'])->name('admin.logout');
         Route::get('dashboard', [Admin\AdminController::class, 'index'])->name('dashboard');
         Route::get('owners', [Admin\AdminController::class, 'showOwnerList']);
 
@@ -59,7 +60,8 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
         Route::delete('customers/{id}/destroy', [Customer\CustomerController::class, 'destroy'])->name('customer.destroy');
         Route::get('customers/{id}/restore', [Customer\CustomerController::class, 'restore'])->name('customer.restore');
 
-        Route::get('restaurants', [Restaurant\RestaurantController::class, 'showRestaurantList'])->name('restaurant.list');
+        Route::get('restaurant', [Restaurant\RestaurantController::class, 'index'])->name('myRestaurant');
+        Route::get('restaurants/list', [Restaurant\RestaurantController::class, 'showRestaurantList'])->name('restaurant.list');
         Route::get('restaurants/create', [Restaurant\RestaurantController::class, 'create'])->name('restaurant.create');
         Route::post('restaurants/create', [Restaurant\RestaurantController::class, 'store'])->name('restaurant.store');
         Route::get('restaurants/{id}/edit', [Restaurant\RestaurantController::class, 'edit'])->name('restaurant.edit');
@@ -82,10 +84,6 @@ Route::middleware(['auth:customer'])->group(function () {
     Route::get('user/profile', [User\UserController::class, 'viewProfile']);
 });
 
-
-
-
-Route::get('restaurant/menu', [Restaurant\RestaurantController::class, 'showMenu']);
 Route::get('restaurant/detail', [Restaurant\RestaurantController::class, 'showDetail']);
 Route::get('restaurant/order', [Restaurant\RestaurantController::class, 'showOrder']);
 

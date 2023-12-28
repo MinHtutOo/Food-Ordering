@@ -51,7 +51,7 @@
                             <a href="{{route('restaurant.create')}}"><i class="fas fa-user-friends"></i>Create</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fas fa-user-friends"></i>My Restaurant</a>
+                            <a href="{{route('myRestaurant')}}"><i class="fas fa-user-friends"></i>My Restaurant</a>
                         </li>
                         <li>
                             <a href="{{route('restaurant.list')}}"><i class="fas fa-user-friends"></i>List</a>

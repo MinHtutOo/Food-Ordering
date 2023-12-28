@@ -93,17 +93,22 @@
               <span>
                 <a href="{{url('user/cart')}}"><i class="fas fa-shopping-basket"></i></a>
               </span>
-              @auth
-                <form method="POST" action="{{url('logout')}}" style="display:inline-block;">
-                  @csrf
-                  <button class="btn">
-                    Logout
-                  </button>
-                </form>
-                {{-- <a href="" class="btn">logout</a> --}}
-              @else
-                <a href="{{url('user/login')}}" class="btn">login</a>
-              @endauth
+              @if (Auth::guard('web')->check())
+                    {{-- Web guard authenticated user --}}
+                    <form method="POST" action="{{ route('admin.logout') }}" style="display:inline-block;">
+                        @csrf
+                        <button class="btn">Logout</button>
+                    </form>
+                @elseif (Auth::guard('customer')->check())
+                    {{-- Customer guard authenticated user --}}
+                    <form method="POST" action="{{ route('logout') }}" style="display:inline-block;">
+                        @csrf
+                        <button class="btn">Logout</button>
+                    </form>
+                @else
+                    {{-- No user is authenticated --}}
+                    <a href="{{ url('login') }}" class="btn">Login</a>
+                @endif
             </div>
           </div>
         </div>

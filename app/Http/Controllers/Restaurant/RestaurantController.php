@@ -11,7 +11,13 @@ use App\Http\Requests\RestaurantEditRequest;
 
 class RestaurantController extends Controller
 {
-    
+    public function index()
+    {
+        $user = auth()->guard('web')->user(); // Get the currently authenticated user
+        $restaurant = $user->restaurant; // Access the user's restaurant
+
+        return view('restaurant.myRestaurant', compact('restaurant', 'user'));
+    }
 
     public function create()
     {
@@ -21,6 +27,7 @@ class RestaurantController extends Controller
     public function store(RestaurantRequest $request)
     {
         try{
+            $user = auth()->guard('web')->user();
             $files = $request->file("file");
             $fileAry = [];
 
@@ -32,7 +39,7 @@ class RestaurantController extends Controller
                 }
             }
             
-            Restaurant::create([
+            $user->restaurant()->create([
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
                 'phone' => $request->input('phone'),
