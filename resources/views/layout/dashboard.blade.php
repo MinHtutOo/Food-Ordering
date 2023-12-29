@@ -34,30 +34,27 @@
                     <a href="{{url('admin/dashboard')}}"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="#authmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-user-shield"></i> User</a>
+                    <a href="#authmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-users"></i> User</a>
                     <ul class="collapse list-unstyled" id="authmenu">
                         <li>
-                            <a href="{{url('admin/customers')}}"><i class="fas fa-user-friends"></i>Customers List</a>
+                            <a href="{{url('admin/customers')}}"><i class="fas fa-user"></i> Customers List</a>
                         </li>
                         <li>
-                            <a href="{{url('admin/owners')}}"><i class="fas fa-user-friends"></i>Owners List</a>
+                            <a href="{{url('admin/owners')}}"><i class="fas fa-user-tie"></i> Owners List</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#pagesmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-user-shield"></i> Restaurant</a>
+                    <a href="#pagesmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-utensils"></i> Restaurant</a>
                     <ul class="collapse list-unstyled" id="pagesmenu">
                         <li>
-                            <a href="{{url('admin/category')}}"><i class="fas fa-user-friends"></i>Category</a>
+                            <a href="{{route('category.index')}}"><i class="fas fa-ellipsis-h"></i> Category</a>
                         </li>
                         <li>
-                            <a href="{{route('restaurant.create')}}"><i class="fas fa-user-friends"></i>Create</a>
+                            <a href="{{route('myRestaurant')}}"><i class="fas fa-store"></i> My Restaurant</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fas fa-user-friends"></i>My Restaurant</a>
-                        </li>
-                        <li>
-                            <a href="{{route('restaurant.list')}}"><i class="fas fa-user-friends"></i>List</a>
+                            <a href="{{route('restaurant.list')}}"><i class="fas fa-list-ul"></i> List</a>
                         </li>
                     </ul>
                 </li>
@@ -65,7 +62,7 @@
                     <a href="{{url('restaurant/order')}}"><i class="fas fa-file-alt"></i> Order List</a>
                 </li>
                 <li>
-                    <a href="tables.html"><i class="fas fa-table"></i> Payment</a>
+                    <a href="tables.html"><i class="fas fa-money-bill-alt"></i> Payment</a>
                 </li>
             </ul>
         </nav>

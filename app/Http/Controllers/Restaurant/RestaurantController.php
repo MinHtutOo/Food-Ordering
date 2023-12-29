@@ -11,7 +11,13 @@ use App\Http\Requests\RestaurantEditRequest;
 
 class RestaurantController extends Controller
 {
-    
+    public function index()
+    {
+        $user = auth()->guard('web')->user(); // Get the currently authenticated user
+        $restaurant = $user->restaurant; // Access the user's restaurant
+
+        return view('restaurant.myRestaurant', compact('restaurant', 'user'));
+    }
 
     public function create()
     {
@@ -21,6 +27,8 @@ class RestaurantController extends Controller
     public function store(RestaurantRequest $request)
     {
         try{
+            $user = auth()->guard('web')->user();
+            //dd($user->id);
             $files = $request->file("file");
             $fileAry = [];
 
@@ -33,6 +41,7 @@ class RestaurantController extends Controller
             }
             
             Restaurant::create([
+                'user_id' => $user->id,
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
                 'phone' => $request->input('phone'),
@@ -41,9 +50,10 @@ class RestaurantController extends Controller
                 'closing_hour' => $request->input('closing_hour'),
                 'image' => $fileAry ? serialize($fileAry) : null,
             ]);
+
             return redirect()->route('restaurant.create')->with('success', 'Successfully Inserted');
         }catch(Exception $e){
-            return redirect()->route('restaurant.create')->with('error', 'Insertion Failed');
+            return redirect()->route('restaurant.create')->with('error', 'Error: ' . $e->getMessage());
         }
     }
 
