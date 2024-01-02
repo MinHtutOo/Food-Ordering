@@ -77,7 +77,6 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
         Route::get('category/{id}/restore', [Restaurant\CategoryController::class, 'restore'])->name('category.restore');
 
     });
-    
 });
 
 Route::get('user/login', [Customer\CustomerController::class, 'login'])->name('login');
