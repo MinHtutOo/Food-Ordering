@@ -23,13 +23,14 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
-        try{
-            Category::create([
+        try {
+            $category = Category::create([
                 'name' => $request->input('name'),
             ]);
+
             return redirect()->route('category.create')->with('success', 'Successfully Inserted');
-        }catch(Exception $e){
-            return redirect()->route('category.create')->with('error', 'Insertion Failed');
+        } catch (Exception $e) {
+            return redirect()->route('category.create')->with('error', 'Insertion Failed: ' . $e->getMessage());
         }
     }
 
