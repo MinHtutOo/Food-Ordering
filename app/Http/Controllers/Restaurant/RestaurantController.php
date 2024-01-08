@@ -3,20 +3,49 @@
 namespace App\Http\Controllers\Restaurant;
 
 use Exception;
+use App\Models\Menu;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Pagination\Paginator;
 use App\Http\Requests\RestaurantRequest;
 use App\Http\Requests\RestaurantEditRequest;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class RestaurantController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $user = auth()->guard('web')->user(); // Get the currently authenticated user
-        $restaurant = $user->restaurant; // Access the user's restaurant
+        $user = auth()->guard('web')->user(); 
+        $restaurant = $user->restaurant;
 
-        return view('restaurant.myRestaurant', compact('restaurant', 'user'));
+        $sortOption = $request->input('sort', 'default');
+
+        $dishesQuery = Menu::select('id', 'name', 'price', 'description', 'image')
+                            ->where('restaurant_id', $restaurant->id);
+
+        switch ($sortOption) {
+            case 'high_to_low':
+                $dishesQuery->orderBy('price', 'desc');
+                break;
+            case 'low_to_high':
+                $dishesQuery->orderBy('price', 'asc');
+                break;
+            default:
+                $dishesQuery->orderBy('id', 'desc');
+                break;
+        }
+        $dishes = $dishesQuery->paginate(12);
+
+        $trashedDishes = Menu::select('id', 'name', 'price', 'description', 'image')
+                                ->where('restaurant_id', $restaurant->id)
+                                ->onlyTrashed()
+                                ->orderBy('id', 'desc')
+                                ->get();
+
+        $productCount = Menu::where('restaurant_id', $restaurant->id)->count();
+
+        return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes'));
     }
 
     public function create()
@@ -143,11 +172,6 @@ class RestaurantController extends Controller
     public function showMenu()
     {
         return view('restaurant.menu');
-    }
-
-    public function showDetail()
-    {
-        return view('restaurant.detail');
     }
 
     public function showOrder()

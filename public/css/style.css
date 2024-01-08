@@ -1361,7 +1361,7 @@ header.header3 .shopping i {
 .home4-footer .ht-footer-bottom .social-box a:last-child {
     margin-right: 0;
 }
-.pagination ul {
+.circle {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -10041,4 +10041,9 @@ ul.slick-dots li.slick-active button {
 }
 .wishlist-area .pagination {
     margin-top: 15px;
+}
+
+.select {
+    color:#fff;
+    background-color: #c33!important;
 }

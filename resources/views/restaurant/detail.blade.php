@@ -16,11 +16,11 @@
         <div class="container padding-top-120">
             <div class="row justify-content-center">
                 <nav aria-label="breadcrumb">
-                    <h2 class="page-title">Chicken Fry Recipe</h2>
+                    <h2 class="page-title">Welcome!</h2>
                     <ol class="breadcrumb text-center">
-                        <li class="breadcrumb-item"><a href="index.html">Home </a> / <a href="index.html"> food shop</a>
+                        <li class="breadcrumb-item"><a href="#">Home </a> /
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Chicken Fry Recipe</li>
+                        <li class="text-white" aria-current="page">{{$dish->name}}</li>
                     </ol>
                 </nav>
             </div>
@@ -41,38 +41,7 @@
                         <div class="slider-for">
                             <div class="single-slide">
                                 <div class="product-content">
-                                    <img class="mp" src="{!!asset('/images/img/br1.png')!!}" alt="">
-                                    <img class="pbadge" src="{!!asset('/images/icons/pbadge.png')!!}" alt="">
-                                </div>
-                            </div>
-                            <div class="single-slide">
-                                <div class="product-content">
-                                    <img class="mp" src="{!!asset('/images/img/br1.png')!!}" alt="">
-                                    <img class="pbadge" src="{!!asset('/images/icons/pbadge.png')!!}" alt="">
-                                </div>
-                            </div>
-                            <div class="single-slide">
-                                <div class="product-content">
-                                    <img class="mp" src="{!!asset('/images/img/br1.png')!!}" alt="">
-                                    <img class="pbadge" src="{!!asset('/images/icons/pbadge.png')!!}" alt="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="slider-nav margin-top-30">
-                            <div class="div">
-                                <div class="pnav">
-                                    <img src="{!!asset('/images/img/br3.png')!!}" alt="">
-                                </div>
-                            </div>
-                            <div class="div">
-                                <div class="pnav">
-                                    <img src="{!!asset('/images/img/br2.png')!!}" alt="">
-                                </div>
-                            </div>
-                            <div class="div">
-                                <div class="pnav">
-                                    <img src="{!!asset('/images/img/br3.png')!!}" alt="">
+                                    <img class="mp img-fluid" src="{{asset('uploads/' . $dish->image)}}" alt="{{$dish->name}}" style="width:90%;height:550px;">
                                 </div>
                             </div>
                         </div>
@@ -80,19 +49,15 @@
                 </div>
                 <div class="col-lg-6 wow fadeInRight">
                     <div class="recipe-right">
-                        <h2>Chicken Fry Recipe</h2>
-                        <form action="#">
+                        <h2>{{$dish->name}}</h2>
                             <div class="chickens-inforbar d-flex justify-content-around align-items-center">
-                                <span class="cp">$10.00 <del>$100.00</del></span>
-                                <span class="rate"> 5<i class="fas fa-star"></i></span>
-                                <span> <span class="colored"><i class="fas fa-comments"></i></span> comment</span>
-                                <span> <span class="colored"><i class="fas fa-heart"></i></span> 200+ like</span>
+                                <span class="cp">Price: $ {{$dish->price}} </span>
+                                <span class="rate"><a href="#" class="text-white"><i class="fas fa-star"></i> rate</a></span>
+                                {{-- <span> <a href="#" class="colored"><i class="fas fa-comments"></i> comment</a></span> --}}
                             </div>
-                            <p>Thing lesser replenish evening called void a sea blessed meat fourth called moveth place
-                                Quarter Rack of Ribs served with your choice of side Pulled Pork, Beer Braised Brisket.
-                            </p>
+                        <form action="#">
                             <div class="chickens-details d-flex justify-content-between">
-                                <span><input type="number" placeholder="01"></span>
+                                <span><input type="number" placeholder="0"></span>
                             </div>
                             <button type="submit" class="btn">add to cart</button>
                         </form>
@@ -116,14 +81,14 @@
                         <div class="nav-link active" id="des-tab" data-bs-toggle="tab" data-bs-target="#des" role="tab"
                             aria-controls="des" aria-selected="true">Description</div>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    {{-- <li class="nav-item" role="presentation">
                         <div class="nav-link" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" role="tab"
                             aria-controls="info" aria-selected="false">Additional information</div>
                     </li>
                     <li class="nav-item" role="presentation">
                         <div class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" role="tab"
                             aria-controls="reviews" aria-selected="false">Reviews</div>
-                    </li>
+                    </li> --}}
                 </ul>
 
             </div>
@@ -137,14 +102,10 @@
                                 <span class="pds3"><img src="{!!asset('/images/shapes/28.png')!!}" alt=""></span>
                             </div>
 
-                            <p>A hamburger (also burger for short) is a sandwich consisting of one or more cooked
-                                patties of ground meat, usually beef, placed inside a sliced bread roll or bun. The
-                                patty may be pan fried, grilled, smoked or flame broiled. Hamburgers are often served
-                                with cheese.</p>
-                            <p> <b>Ingredients </b> Focaccia bun, Balsamic Vinaigrette, Pesto, Tomato, Swiss Cheese</p>
+                            <p>{!! str_replace('.', '.<br>', $dish->description) !!}</p>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info">
+                    {{-- <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info">
                         <div class="pd-inner-content">
                             <p>A hamburger (also burger for short) is a sandwich consisting of one or more cooked
                                 patties of ground meat, usually beef, placed inside a sliced bread roll or bun. The
@@ -161,10 +122,15 @@
                                 with cheese.</p>
                             <p> <b>Ingredients </b> Focaccia bun, Balsamic Vinaigrette, Pesto, Tomato, Swiss Cheese</p>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
+        </div>
+        <div class="container d-flex justify-content-end">
+            <span">
+                <a href="{{route('myRestaurant')}}" class="btn btn-primary my-3"> back</a>
+            </span>
         </div>
     </section>
 @endsection

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\User;
 use App\Http\Controllers\Customer;
+use App\Http\Controllers\PaginationController;
 use App\Http\Controllers\Restaurant;
 use Illuminate\Support\Facades\Route;
 
@@ -76,6 +77,13 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
         Route::delete('category/{id}/destroy', [Restaurant\CategoryController::class, 'destroy'])->name('category.destroy');
         Route::get('category/{id}/restore', [Restaurant\CategoryController::class, 'restore'])->name('category.restore');
 
+        Route::get('menu/create', [Restaurant\MenuController::class, 'create'])->name('menu.create');
+        Route::post('menu/create', [Restaurant\MenuController::class, 'store'])->name('menu.store');
+        Route::get('menu/{id}/edit', [Restaurant\MenuController::class, 'edit'])->name('menu.edit');
+        Route::put('menu/{id}/update', [Restaurant\MenuController::class, 'update'])->name('menu.update');
+        Route::delete('menu/{id}/destroy', [Restaurant\MenuController::class, 'destroy'])->name('menu.destroy');
+        Route::get('menu/{id}/restore', [Restaurant\MenuController::class, 'restore'])->name('menu.restore');
+        Route::delete('menu/{id}/forceDestroy', [Restaurant\MenuController::class, 'forceDestroy'])->name('menu.forceDestroy');
     });
     
 });
@@ -93,7 +101,7 @@ Route::middleware(['auth:customer'])->group(function () {
 });
 
 Route::get('restaurant/menu', [Restaurant\RestaurantController::class, 'showMenu']);
-Route::get('restaurant/detail', [Restaurant\RestaurantController::class, 'showDetail']);
+Route::get('restaurant/{id}/detail', [Restaurant\MenuController::class, 'showDetail'])->name('menu.detail');
 Route::get('restaurant/order', [Restaurant\RestaurantController::class, 'showOrder']);
 
 Route::get('/signup', function (){
