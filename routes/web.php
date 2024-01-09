@@ -41,6 +41,7 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
 
     Route::group(['middleware' => ['auth:web']], function () {
         Route::post('logout', [Admin\AdminController::class, 'adminLogout'])->name('admin.logout');
+        Route::get('profile', [Admin\AdminController::class, 'adminProfile'])->name('admin.profile');
         Route::get('dashboard', [Admin\AdminController::class, 'index'])->name('dashboard');
         Route::get('owners', [Admin\AdminController::class, 'showOwnerList']);
 
@@ -96,8 +97,9 @@ Route::post('user/signup', [Customer\CustomerController::class, 'store'])->name(
 Route::middleware(['auth:customer'])->group(function () {
     Route::post('logout', [Customer\CustomerController::class, 'logout'])->name('logout');
     Route::get('user/cart', [User\UserController::class, 'addToCart']);
-    Route::get('user/checkout', [User\UserController::class, 'checkout']);
-    Route::get('user/profile', [User\UserController::class, 'viewProfile']);
+    Route::get('user/checkout', [User\UserController::class, 'checkout'])->name('checkout');
+    Route::get('user/profile', [User\UserController::class, 'viewProfile'])->name('profile');
+    Route::post('user/changePassword', [Customer\CustomerController::class, 'changePassword'])->name('changePassword');
 });
 
 Route::get('restaurant/menu', [Restaurant\RestaurantController::class, 'showMenu']);

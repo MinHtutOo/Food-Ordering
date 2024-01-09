@@ -18,11 +18,14 @@ class RestaurantController extends Controller
     {
         $user = auth()->guard('web')->user(); 
         $restaurant = $user->restaurant;
+        
 
         $sortOption = $request->input('sort', 'default');
-
+        
+        if($restaurant) {
         $dishesQuery = Menu::select('id', 'name', 'price', 'description', 'image')
                             ->where('restaurant_id', $restaurant->id);
+                            
 
         switch ($sortOption) {
             case 'high_to_low':
@@ -46,17 +49,23 @@ class RestaurantController extends Controller
         $productCount = Menu::where('restaurant_id', $restaurant->id)->count();
 
         return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes'));
+        }else{
+            return view('restaurant.myRestaurant', compact('restaurant', 'user'));
+        }
+
     }
 
     public function create()
     {
+        // dd(auth()->user());
         return view('restaurant.create');
     }
 
     public function store(RestaurantRequest $request)
     {
+        //dd($request->all());
         try{
-            $user = auth()->guard('web')->user();
+            $user = auth()->user();
             //dd($user->id);
             $files = $request->file("file");
             $fileAry = [];
@@ -78,11 +87,11 @@ class RestaurantController extends Controller
                 'opening_hour' => $request->input('opening_hour'),
                 'closing_hour' => $request->input('closing_hour'),
                 'image' => $fileAry ? serialize($fileAry) : null,
-            ]);
-
-            return redirect()->route('restaurant.create')->with('success', 'Successfully Inserted');
+            ]);       
+            return redirect()->route('myRestaurant')->with('success', 'Successfully Inserted');
         }catch(Exception $e){
-            return redirect()->route('restaurant.create')->with('error', 'Error: ' . $e->getMessage());
+            // dd($e->getMessage());
+            return redirect()->route('myRestaurant')->with('error', 'Error: ' . $e->getMessage());
         }
     }
 

@@ -28,12 +28,12 @@
               <a href="mailto:jackfood2000@gmail.com"><i class="fas fa-envelope-open-text"></i>
                 jackfood2000@gmail.com</a></span>
           </div>
-          <div class="social-box">
+          {{-- <div class="social-box">
             <span><a href="#"><i class="fab fa-twitter"></i></a></span>
             <span><a href="#"><i class="fab fa-facebook-f"></i></a></span>
             <span><a href="#"><i class="fab fa-linkedin-in"></i></a></span>
             <span><a href="#"><i class="fab fa-instagram"></i></a></span>
-          </div>
+          </div> --}}
         </div>
       </div>
     </div>
@@ -87,12 +87,18 @@
         </div>
         <div class="col-lg-4 col-md-9 col-8">
           <div class="customer-area">
-            <span>
-              <a href="{{url('user/profile')}}"><i class="fas fa-user"></i></a>
-            </span>
-            <span>
-              <a href="{{url('user/cart')}}"><i class="fas fa-shopping-basket"></i></a>
-            </span>
+            @if(auth()->guard('web')->check())
+              <span>
+                <a href="{{route('admin.profile')}}"><i class="fas fa-user"></i></a>
+              </span>
+            @elseif(auth()->guard('customer')->check())
+              <span>
+                <a href="{{url('user/profile')}}"><i class="fas fa-user"></i></a>
+              </span>
+              <span>
+                <a href="{{url('user/cart')}}"><i class="fas fa-shopping-basket"></i></a>
+              </span>
+            @endif
             @if (Auth::guard('web')->check())
                   {{-- Web guard authenticated user --}}
                   <form method="POST" action="{{ route('admin.logout') }}" style="display:inline-block;">
@@ -107,13 +113,13 @@
                   </form>
               @else
                   {{-- No user is authenticated --}}
-                  <a href="{{ url('login') }}" class="btn">Login</a>
+                  <a href="{{ route('login') }}" class="btn">Login</a>
               @endif
           </div>
         </div>
       </div>
       <!-- mobile-menu -->
-      <div class="mobile-menu"></div>
+      {{-- <div class="mobile-menu"></div> --}}
     </div>
   </div>
 </header>

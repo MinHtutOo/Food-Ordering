@@ -45,6 +45,11 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
+    public function adminProfile()
+    {
+        return view('user.profile');
+    }
+
     public function showOwnerList()
     {
         return view('admin.ownerList');

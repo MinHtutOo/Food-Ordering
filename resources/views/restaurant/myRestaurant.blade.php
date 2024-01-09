@@ -52,11 +52,27 @@
                         <h2 class="page-title">Welcome! {{$user->name}}</h2>
                         <ol class="breadcrumb text-center">
                             <li class="breadcrumb-item"><a href="{{url('home')}}">Home</a> / </li>
-                            <li class="text-white">My Restaurant</li>
+                            <li class="text-white"> &nbsp;My Restaurant</li>
                         </ol>
                     </nav>
                 </div>
             </div>
+        </div>
+
+        <div class="container my-3">
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{session('success')}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>{{session('error')}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
         </div>
 
         <!-- food area -->
@@ -213,6 +229,22 @@
                     </nav>
                 </div>
             </div>
+        </div>
+
+        <div class="container my-3">
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{session('success')}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>{{session('error')}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
         </div>
 
         <section class="food-area  popular-dishes-area padding-top-110 padding-bottom-110">

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\CustomerEditRequest;
 use App\Http\Requests\RegisterFormRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -127,5 +129,10 @@ class CustomerController extends Controller
         }catch(Exception $e){
             return redirect()->route('customer.list')->with('error', $e->getMessage());
         }
+    }
+
+    public function changePassword(PasswordRequest $request)
+    {
+        dd($request->all());
     }
 }
