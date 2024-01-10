@@ -13,8 +13,8 @@ class RestaurantController extends Controller
 {
     public function index()
     {
-        $user = auth()->guard('web')->user(); // Get the currently authenticated user
-        $restaurant = $user->restaurant; // Access the user's restaurant
+        $user = auth()->guard('web')->user(); 
+        $restaurant = $user->restaurant; 
 
         return view('restaurant.myRestaurant', compact('restaurant', 'user'));
     }
@@ -26,8 +26,9 @@ class RestaurantController extends Controller
 
     public function store(RestaurantRequest $request)
     {
+        //dd($request->all());
         try{
-            $user = auth()->guard('web')->user();
+            $user = auth()->user();
             //dd($user->id);
             $files = $request->file("file");
             $fileAry = [];
@@ -49,11 +50,11 @@ class RestaurantController extends Controller
                 'opening_hour' => $request->input('opening_hour'),
                 'closing_hour' => $request->input('closing_hour'),
                 'image' => $fileAry ? serialize($fileAry) : null,
-            ]);
-
-            return redirect()->route('restaurant.create')->with('success', 'Successfully Inserted');
+            ]);       
+            return redirect()->route('myRestaurant')->with('success', 'Successfully Inserted');
         }catch(Exception $e){
-            return redirect()->route('restaurant.create')->with('error', 'Error: ' . $e->getMessage());
+            // dd($e->getMessage());
+            return redirect()->route('myRestaurant')->with('error', 'Error: ' . $e->getMessage());
         }
     }
 
