@@ -31,16 +31,16 @@ Route::get('/contact', function (){
 });
 
 Route::get('restaurant', [Restaurant\RestaurantController::class, 'showAllRestaurant'])->name('restaurants');
-Route::get('menu', [Restaurant\RestaurantController::class, 'showMenu'])->name('menu');
+Route::get('menu/{id}', [Restaurant\RestaurantController::class, 'showMenu'])->name('menu');
 
-
-
+// Route for Auth admin and owner
 Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
     Route::get('/', [Admin\AdminController::class, 'adminLogin']);
     Route::post('/', [Admin\AdminController::class, 'adminAuthenticate']);
 
     Route::group(['middleware' => ['auth:web']], function () {
         Route::post('logout', [Admin\AdminController::class, 'adminLogout'])->name('admin.logout');
+        Route::get('profile', [Admin\AdminController::class, 'adminProfile'])->name('admin.profile');
         Route::get('dashboard', [Admin\AdminController::class, 'index'])->name('dashboard');
         Route::get('owners', [Admin\AdminController::class, 'showOwnerList']);
 
@@ -68,7 +68,7 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
         Route::put('restaurants/{id}/update', [Restaurant\RestaurantController::class, 'update'])->name('restaurant.update');
         Route::delete('restaurants/{id}/destroy', [Restaurant\RestaurantController::class, 'destroy'])->name('restaurant.destroy');
         Route::get('restaurants/{id}/restore', [Restaurant\RestaurantController::class, 'restore'])->name('restaurant.restore');
-
+        
         Route::get('category', [Restaurant\CategoryController::class, 'index'])->name('category.index');
         Route::get('category/create', [Restaurant\CategoryController::class, 'create'])->name('category.create');
         Route::post('category/create', [Restaurant\CategoryController::class, 'store'])->name('category.store');
@@ -84,10 +84,12 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
         Route::delete('menu/{id}/destroy', [Restaurant\MenuController::class, 'destroy'])->name('menu.destroy');
         Route::get('menu/{id}/restore', [Restaurant\MenuController::class, 'restore'])->name('menu.restore');
         Route::delete('menu/{id}/forceDestroy', [Restaurant\MenuController::class, 'forceDestroy'])->name('menu.forceDestroy');
+        Route::get('menu/{id}/detail', [Restaurant\MenuController::class, 'detail'])->name('menu.detail');
     });
     
 });
 
+// Route for Auth customer
 Route::get('user/login', [Customer\CustomerController::class, 'login'])->name('login');
 Route::post('user/login', [Customer\CustomerController::class, 'authenticate'])->name('auth');
 Route::get('user/signup', [Customer\CustomerController::class, 'create'])->name('signup');
@@ -98,10 +100,12 @@ Route::middleware(['auth:customer'])->group(function () {
     Route::get('user/cart', [User\UserController::class, 'addToCart']);
     Route::get('user/checkout', [User\UserController::class, 'checkout']);
     Route::get('user/profile', [User\UserController::class, 'viewProfile']);
+
+    Route::get('restaurants/{id}/detail', [Restaurant\RestaurantController::class, 'detail'])->name('restaurant.detail');
+    Route::get('menu/{id}/detail', [Restaurant\MenuController::class, 'viewDetail'])->name('menuItem.detail');
 });
 
 Route::get('restaurant/menu', [Restaurant\RestaurantController::class, 'showMenu']);
-Route::get('restaurant/{id}/detail', [Restaurant\MenuController::class, 'showDetail'])->name('menu.detail');
 Route::get('restaurant/order', [Restaurant\RestaurantController::class, 'showOrder']);
 
 Route::get('/signup', function (){

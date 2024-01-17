@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', 'Food Detail')
+@section('title', 'Checkout')
 
 @section('content')
     <!-- breadcrumb-area -->
@@ -16,121 +16,78 @@
         <div class="container padding-top-120">
             <div class="row justify-content-center">
                 <nav aria-label="breadcrumb">
-                    <h2 class="page-title">Welcome!</h2>
+                    <h2 class="page-title">detail</h2>
                     <ol class="breadcrumb text-center">
-                        <li class="breadcrumb-item"><a href="#">Home </a> /
-                        </li>
-                        <li class="text-white" aria-current="page">{{$dish->name}}</li>
+                        <li class="breadcrumb-item"><a href="{{url('home')}}">Home / </a> <a href="{{url('restaurants')}}">
+                                Restaurant / 
+                                </a></li>
+                        <li class="text-white"> &nbsp;Detail</li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
 
-    <!-- chicken-recipe-area -->
-    <section class="chicken-recipe-area padding-top-115 padding-bottom-80">
-        <div class="recipe-shapes">
-            <span class="rs1"><img src="{!!asset('/images/shapes/12.png')!!}" alt=""></span>
-            <span class="rs2"><img src="{!!asset('/images/shapes/13.png')!!}" alt=""></span>
-            <span class="rs3"><img src="{!!asset('/images/shapes/26.png')!!}" alt=""></span>
+    <!-- checkout-area -->
+    <div class="checkout-area padding-top-120 padding-bottom-120">
+        <div class="cshapes">
+            <span class="cs-1"><img src="{!!asset('/images/img/6.png')!!}" alt=""></span>
+            <span class="cs-2 item-bounce"><img src="{!!asset('/images/shapes/12.png')!!}" alt=""></span>
+            <span class="cs-3"><img src="{!!asset('/images/shapes/13.png')!!}" alt=""></span>
+            <span class="cs-4"><img src="{!!asset('/images/shapes/14.png')!!}" alt=""></span>
+            <span class="cs-5"><img src="{!!asset('/images/img/32.png')!!}" alt=""></span>
+            <span class="cs-6"><img src="{!!asset('/images/shapes/16.png')!!}" alt=""></span>
         </div>
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 margin-bottom-30 wow fadeInLeft">
-                    <div class="recipe-left">
-                        <div class="slider-for">
-                            <div class="single-slide">
-                                <div class="product-content">
-                                    <img class="mp img-fluid" src="{{asset('uploads/' . $dish->image)}}" alt="{{$dish->name}}" style="width:90%;height:550px;">
+            <form action="#">
+                <div class="row">
+                    <div class="col-lg-6  wow fadeInUp">
+                        <div class="checkout-left" style="height: 500px;">
+                            <div id="carouselExampleDark" class="carousel carousel-dark slide">
+                                <div class="carousel-indicators">
+                                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
                                 </div>
+                                <div class="carousel-inner">
+                                    @foreach($restaurant->images as $image)
+                                        <div class="carousel-item active" data-bs-interval="10000">
+                                            <a href="{{asset('uploads/' . $image)}}" class="d-block restaurant-img" target="_blank">
+                                                <img src="{{asset('uploads/' . $image)}}" class="d-block restaurant-img" alt="...">
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                  <span class="visually-hidden">Previous</span>
+                                </button> 
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="visually-hidden">Next</span>
+                                </button>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-lg-6  wow fadeInUp ">
+                        <div class="checkout-right">
+                            <h4>{{$restaurant->name}}</h4>
+                            <div class="divider"></div>
+                                <ul>
+                                    <li><b>Address : </b> {{$restaurant->address}}</li>
+                                    <li><b>Phone &emsp;: </b> {{$restaurant->phone}}</li>
+                                    <br>
+                                    <li><b>Opening Hour :</b> {{ \Carbon\Carbon::createFromFormat('H:i:s', $restaurant->opening_hour)->format('g:i A') }}</li>
+                                    <li><b>Closing Hour &nbsp; :</b> {{ \Carbon\Carbon::createFromFormat('H:i:s', $restaurant->closing_hour)->format('g:i A') }}</li>
+                                </ul>
+                            <br>
+                            <div class="text-center">
+                                <a href="{{route('menu', $restaurant->id)}}" class="btn menu">Menu</a>
+                            </div>
+                        </div> 
                     </div>
                 </div>
-                <div class="col-lg-6 wow fadeInRight">
-                    <div class="recipe-right">
-                        <h2>{{$dish->name}}</h2>
-                            <div class="chickens-inforbar d-flex justify-content-around align-items-center">
-                                <span class="cp">Price: $ {{$dish->price}} </span>
-                                <span class="rate"><a href="#" class="text-white"><i class="fas fa-star"></i> rate</a></span>
-                                {{-- <span> <a href="#" class="colored"><i class="fas fa-comments"></i> comment</a></span> --}}
-                            </div>
-                        <form action="#">
-                            <div class="chickens-details d-flex justify-content-between">
-                                <span><input type="number" placeholder="0"></span>
-                            </div>
-                            <button type="submit" class="btn">add to cart</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            </form>
         </div>
-    </section>
-
-    <!-- product-description -->
-    <section class="product-des-area">
-        <div class="pdes-shapes">
-            <span class="pds1"><img src="{!!asset('/images/img/32.png')!!}" alt=""></span>
-            <span class="pds2"><img src="{!!asset('/images/shapes/7.png')!!}" alt=""></span>
-
-        </div>
-        <div class="container">
-            <div class="product-des-nav margin-bottom-30">
-                <ul class="nav" id="productDesTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <div class="nav-link active" id="des-tab" data-bs-toggle="tab" data-bs-target="#des" role="tab"
-                            aria-controls="des" aria-selected="true">Description</div>
-                    </li>
-                    {{-- <li class="nav-item" role="presentation">
-                        <div class="nav-link" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" role="tab"
-                            aria-controls="info" aria-selected="false">Additional information</div>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <div class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" role="tab"
-                            aria-controls="reviews" aria-selected="false">Reviews</div>
-                    </li> --}}
-                </ul>
-
-            </div>
-            <div class="product-des-content">
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="des" role="tabpanel" aria-labelledby="info-tab">
-                        <div class="pd-inner-content">
-                            <div class="pd-shapes">
-                                <span class="pds1"><img src="{!!asset('/images/shapes/17.png')!!}" alt=""></span>
-                                <span class="pds2"><img src="{!!asset('/images/shapes/7.png')!!}" alt=""></span>
-                                <span class="pds3"><img src="{!!asset('/images/shapes/28.png')!!}" alt=""></span>
-                            </div>
-
-                            <p>{!! str_replace('.', '.<br>', $dish->description) !!}</p>
-                        </div>
-                    </div>
-                    {{-- <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info">
-                        <div class="pd-inner-content">
-                            <p>A hamburger (also burger for short) is a sandwich consisting of one or more cooked
-                                patties of ground meat, usually beef, placed inside a sliced bread roll or bun. The
-                                patty may be pan fried, grilled, smoked or flame broiled. Hamburgers are often served
-                                with cheese.</p>
-                            <p> <b>Ingredients </b> Focaccia bun, Balsamic Vinaigrette, Pesto, Tomato, Swiss Cheese</p>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                        <div class="pd-inner-content">
-                            <p>A hamburger (also burger for short) is a sandwich consisting of one or more cooked
-                                patties of ground meat, usually beef, placed inside a sliced bread roll or bun. The
-                                patty may be pan fried, grilled, smoked or flame broiled. Hamburgers are often served
-                                with cheese.</p>
-                            <p> <b>Ingredients </b> Focaccia bun, Balsamic Vinaigrette, Pesto, Tomato, Swiss Cheese</p>
-                        </div>
-                    </div> --}}
-                </div>
-            </div>
-
-        </div>
-        <div class="container d-flex justify-content-end">
-            <span">
-                <a href="{{route('myRestaurant')}}" class="btn btn-primary my-3"> back</a>
-            </span>
-        </div>
-    </section>
+    </div>
 @endsection

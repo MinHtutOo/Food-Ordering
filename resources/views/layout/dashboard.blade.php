@@ -95,7 +95,7 @@
                                 <a href="" class="nav-item nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-user"></i> <span>{{auth()->user()->name}}</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right nav-link-menu">
                                     <ul class="nav-list">
-                                        <li><a href="{{url('user/profile')}}" class="dropdown-item"><i class="fas fa-address-card"></i> Profile</a></li>
+                                        <li><a href="{{route('admin.profile')}}" class="dropdown-item"><i class="fas fa-address-card"></i> Profile</a></li>
                                         <div class="dropdown-divider"></div>
                                         {{-- <li><a href="" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a></li> --}}
                                         <li>

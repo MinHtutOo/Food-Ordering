@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Restaurant;
 
 use Exception;
 use App\Models\Menu;
+use App\Models\Category;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,13 +17,16 @@ class RestaurantController extends Controller
 {
     public function index(Request $request)
     {
-        $user = auth()->guard('web')->user(); 
+        $user = auth()->user(); 
         $restaurant = $user->restaurant;
+        
 
         $sortOption = $request->input('sort', 'default');
-
+        
+        if($restaurant) {
         $dishesQuery = Menu::select('id', 'name', 'price', 'description', 'image')
                             ->where('restaurant_id', $restaurant->id);
+                            
 
         switch ($sortOption) {
             case 'high_to_low':
@@ -46,6 +50,10 @@ class RestaurantController extends Controller
         $productCount = Menu::where('restaurant_id', $restaurant->id)->count();
 
         return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes'));
+        }else{
+            return view('restaurant.myRestaurant', compact('restaurant', 'user'));
+        }
+
     }
 
     public function create()
@@ -55,8 +63,9 @@ class RestaurantController extends Controller
 
     public function store(RestaurantRequest $request)
     {
+        //dd($request->all());
         try{
-            $user = auth()->guard('web')->user();
+            $user = auth()->user();
             //dd($user->id);
             $files = $request->file("file");
             $fileAry = [];
@@ -78,11 +87,11 @@ class RestaurantController extends Controller
                 'opening_hour' => $request->input('opening_hour'),
                 'closing_hour' => $request->input('closing_hour'),
                 'image' => $fileAry ? serialize($fileAry) : null,
-            ]);
-
-            return redirect()->route('restaurant.create')->with('success', 'Successfully Inserted');
+            ]);       
+            return redirect()->route('myRestaurant')->with('success', 'Successfully Inserted');
         }catch(Exception $e){
-            return redirect()->route('restaurant.create')->with('error', 'Error: ' . $e->getMessage());
+            // dd($e->getMessage());
+            return redirect()->route('myRestaurant')->with('error', 'Error: ' . $e->getMessage());
         }
     }
 
@@ -166,16 +175,38 @@ class RestaurantController extends Controller
 
     public function showAllRestaurant()
     {
-        return view('restaurant.index');
+        $restaurants = Restaurant::select('id', 'name', 'email', 'address', 'phone', 'opening_hour', 'closing_hour', 'image')
+                    ->paginate(8);
+    
+        // dd($restaurants);
+        foreach ($restaurants as $restaurant) {
+            $restaurant->images = unserialize($restaurant->image);
+        }
+
+        return view('restaurant.index', compact('restaurants'));
     }
 
-    public function showMenu()
+    public function detail(string $id)
     {
-        return view('restaurant.menu');
+        $restaurant = Restaurant::select('id', 'name', 'email', 'address', 'phone', 'opening_hour', 'closing_hour', 'image')->findOrFail($id);
+
+        $restaurant->images = unserialize($restaurant->image);
+        return view('restaurant.detail', compact('restaurant'));
+    }
+
+    public function showMenu(string $id)
+    {
+        $menuItems = Menu::select('id', 'name', 'price', 'description', 'image')
+                    ->where('restaurant_id', $id)
+                    ->paginate(8);
+
+        $categories = Category::select('id','name')->get();
+
+        return view('restaurant.menu' , compact('menuItems', 'categories', 'id'));
     }
 
     public function showOrder()
-    {
+    { 
         return view('restaurant.orderList');
     }
 

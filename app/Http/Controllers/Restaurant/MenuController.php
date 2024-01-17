@@ -128,10 +128,17 @@ class MenuController extends Controller
         }
     }
 
-    public function showDetail(string $id)
+    public function detail(string $id)
     {
         $dish = Menu::select('name', 'description', 'price', 'image')->findOrFail($id);
 
-        return view('restaurant.detail', compact('dish'));
+        return view('menu.detail', compact('dish'));
+    }
+
+    public function viewDetail(string $id)
+    {
+        $dish = Menu::select('name', 'description', 'price', 'image')->findOrFail($id);
+
+        return view('menu.detail', compact('dish'));
     }
 }

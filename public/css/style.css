@@ -4879,7 +4879,7 @@ ul.slick-dots li.slick-active button {
     bottom: 9%;
 }
 .checkout-area .checkout-left {
-    padding: 50px 40px;
+    padding: 25px;
     background-color: #fffcf5;
     border: 1px solid #e1e1e1;
     border-radius: 10px;
@@ -5132,7 +5132,7 @@ ul.slick-dots li.slick-active button {
 }
 .chicken-recipe-area .recipe-right .chickens-inforbar {
     background: #ffedee;
-    margin-bottom: 30px;
+    margin-bottom: 7px;
 }
 .chicken-recipe-area .recipe-right .chickens-inforbar span {
     text-transform: capitalize;
@@ -10047,3 +10047,59 @@ ul.slick-dots li.slick-active button {
     color:#fff;
     background-color: #c33!important;
 }
+
+.restaurant {
+    height: 150px;
+    width: inherit;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}   
+
+.restaurant-img {
+    width: inherit;
+    height: 450px;
+}
+
+/* Customize carousel control icons */
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    color: darkcyan;
+}
+
+.menu {
+    color: #fff!important;
+}
+
+.menu:hover {
+    color: #c33!important;
+}
+
+.scrollable-tabs-container {
+    position: relative;
+    overflow: hidden!important;
+}
+
+
+.scrollable-tabs-container svg {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #c33;
+}
+
+
+.over {
+    overflow-x: scroll;
+    flex-wrap: nowrap!important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+
+.over::-webkit-scrollbar {
+    display: none;
+}
+
+
+
