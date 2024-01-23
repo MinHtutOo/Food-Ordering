@@ -27,6 +27,23 @@
         </div>
     </div>
 
+    @section('content')
+    <div class="container my-3">
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{session('success')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{session('error')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+    </div>
+
     <!-- chicken-recipe-area -->
     <section class="chicken-recipe-area padding-top-115 padding-bottom-80">
         <div class="recipe-shapes">
@@ -75,12 +92,9 @@
                             <div class="chickens-inforbar d-flex align-items-center">
                                 <span class="rate ms-3 my-3"><a href="#" class="text-white"><i class="fas fa-star"></i> rate</a></span>
                             </div>
-                            <form action="#" method="POST">
-                                <div class="chickens-details d-flex justify-content-between">
-                                    <span>
-                                        <input type="number" value="1" min="1" style="width: 170px;padding: 10px">
-                                    </span>
-                                </div>
+                            <form action="{{route('addCart', $dish->id)}}" method="POST">
+                                @csrf
+
                                 <button type="submit" class="btn">add to cart</button>
                             </form>
                         @endif
@@ -126,7 +140,7 @@
         </div>
         <div class="container d-flex justify-content-end">
             <span>
-                <a href="{{route('myRestaurant')}}" class="btn btn-primary my-3"> back</a>
+                <a href="{{ route('menu', $dish->restaurant_id)}}" class="btn btn-primary my-3"> back</a>
             </span>
         </div>
     </section>

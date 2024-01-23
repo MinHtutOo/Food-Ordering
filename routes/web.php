@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\User;
 use App\Http\Controllers\Customer;
-use App\Http\Controllers\PaginationController;
 use App\Http\Controllers\Restaurant;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +31,7 @@ Route::get('/contact', function (){
 });
 
 Route::get('restaurant', [Restaurant\RestaurantController::class, 'showAllRestaurant'])->name('restaurants');
-Route::get('menu/{id}', [Restaurant\RestaurantController::class, 'showMenu'])->name('menu');
+Route::get('restaurant/{id}/menu', [Restaurant\RestaurantController::class, 'showMenu'])->name('menu');
 
 // Route for Auth admin and owner
 Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
@@ -97,12 +97,16 @@ Route::post('user/signup', [Customer\CustomerController::class, 'store'])->name(
 
 Route::middleware(['auth:customer'])->group(function () {
     Route::post('logout', [Customer\CustomerController::class, 'logout'])->name('logout');
-    Route::get('user/cart', [User\UserController::class, 'addToCart']);
+    Route::get('user/cart', [User\UserController::class, 'cart'])->name('user.cart');
     Route::get('user/checkout', [User\UserController::class, 'checkout']);
     Route::get('user/profile', [User\UserController::class, 'viewProfile']);
 
     Route::get('restaurants/{id}/detail', [Restaurant\RestaurantController::class, 'detail'])->name('restaurant.detail');
     Route::get('menu/{id}/detail', [Restaurant\MenuController::class, 'viewDetail'])->name('menuItem.detail');
+
+    Route::post('addCart/{id}', [Customer\OrderController::class, 'addCart'])->name('addCart');
+    Route::delete('remove/{id}', [Customer\OrderController::class, 'remove'])->name('remove');
+    Route::get('restore/{id}', [Customer\OrderController::class, 'restore'])->name('restore');
 });
 
 Route::get('restaurant/menu', [Restaurant\RestaurantController::class, 'showMenu']);

@@ -65,7 +65,7 @@
                     <a href="{{url('user/checkout')}}">checkout page</a>
                   </li>
                   <li>
-                    <a href="{{url('user/cart')}}">shopping cart page</a>
+                    <a href="{{route('user.cart')}}">shopping cart page</a>
                   </li>
                   <li>
                     <a href="{{url('user/profile')}}">profile page</a>
@@ -96,7 +96,7 @@
                 <a href="{{url('user/profile')}}"><i class="fas fa-user"></i></a>
               </span>
               <span>
-                <a href="{{url('user/cart')}}"><i class="fas fa-shopping-basket"></i></a>
+                <a href="{{route('user.cart')}}"><i class="fas fa-shopping-basket"></i></a>
               </span>
             @endif
             @if (Auth::guard('web')->check())
