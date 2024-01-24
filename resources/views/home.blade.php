@@ -83,7 +83,7 @@
                   ">
                 <div class="about-gallery-4 text-center">
                   <img class="mp" src="{!!asset('/images/icons/3.png')!!}" alt="" />
-                  <div class="items counter">{{$products}}</div>
+                  <div class="items counter"></div>
                   <p>food item</p>
                   <span class="g-s-4"><img src="{!!asset('/images/shapes/10.png')!!}" alt="" /></span>
                   <span class="g-s-5"><img src="{!!asset('/images/shapes/14.png')!!}" alt="" /></span>

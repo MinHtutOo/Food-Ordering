@@ -15,10 +15,51 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class RestaurantController extends Controller
 {
+    // public function index(Request $request)
+    // {
+    //     $user = auth()->user(); 
+    //     $restaurant = $user->restaurant;
+
+    //     $sortOption = $request->input('sort', 'default');
+        
+    //     if($restaurant) {
+    //     $dishesQuery = Menu::select('id', 'name', 'price', 'description', 'image')
+    //                         ->where('restaurant_id', $restaurant->id);
+                            
+
+    //     switch ($sortOption) {
+    //         case 'high_to_low':
+    //             $dishesQuery->orderBy('price', 'desc');
+    //             break;
+    //         case 'low_to_high':
+    //             $dishesQuery->orderBy('price', 'asc');
+    //             break;
+    //         default:
+    //             $dishesQuery->orderBy('id', 'desc');
+    //             break;
+    //     }
+    //     $dishes = $dishesQuery->paginate(12);
+
+    //     $trashedDishes = Menu::select('id', 'name', 'price', 'description', 'image')
+    //                             ->where('restaurant_id', $restaurant->id)
+    //                             ->onlyTrashed()
+    //                             ->orderBy('id', 'desc')
+    //                             ->get();
+
+    //     $productCount = Menu::where('restaurant_id', $restaurant->id)->count();
+
+    //     return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes'));
+    //     }else{
+    //         return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes'));
+    //     }
+
+    // }
+
     public function index(Request $request)
     {
         $user = auth()->user(); 
         $restaurant = $user->restaurant;
+        
 
         $sortOption = $request->input('sort', 'default');
         
@@ -48,9 +89,9 @@ class RestaurantController extends Controller
 
         $productCount = Menu::where('restaurant_id', $restaurant->id)->count();
 
-        return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes', 'products'));
+        return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes'));
         }else{
-            return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes', 'products'));
+            return view('restaurant.myRestaurant', compact('restaurant', 'user'));
         }
 
     }
