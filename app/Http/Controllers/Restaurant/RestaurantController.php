@@ -19,7 +19,6 @@ class RestaurantController extends Controller
     {
         $user = auth()->user(); 
         $restaurant = $user->restaurant;
-        
 
         $sortOption = $request->input('sort', 'default');
         
@@ -49,9 +48,9 @@ class RestaurantController extends Controller
 
         $productCount = Menu::where('restaurant_id', $restaurant->id)->count();
 
-        return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes'));
+        return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes', 'products'));
         }else{
-            return view('restaurant.myRestaurant', compact('restaurant', 'user'));
+            return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes', 'products'));
         }
 
     }

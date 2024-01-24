@@ -18,15 +18,6 @@
         <div class="col-md-12 col-lg-6 col-xl-6">
           <div class="banner-content">
             <h1>enjoy our delicious <span>food</span></h1>
-            <!-- buyone-shape -->
-            <div class="buyone-shape">
-              <div class="banner-tag">
-                <h5>buy one. get one</h5>
-              </div>
-              <span class="banner-badge">free</span>
-            </div>
-            <!-- pricing -->
-            <div class="price">price : <span>$10.50</span></div>
 
             <!-- order-box -->
             <div class="order-box">
@@ -92,7 +83,7 @@
                   ">
                 <div class="about-gallery-4 text-center">
                   <img class="mp" src="{!!asset('/images/icons/3.png')!!}" alt="" />
-                  <div class="items counter">2000</div>
+                  <div class="items counter">{{$products}}</div>
                   <p>food item</p>
                   <span class="g-s-4"><img src="{!!asset('/images/shapes/10.png')!!}" alt="" /></span>
                   <span class="g-s-5"><img src="{!!asset('/images/shapes/14.png')!!}" alt="" /></span>

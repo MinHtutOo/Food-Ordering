@@ -28,7 +28,7 @@ class MenuController extends Controller
     public function store(MenuRequest $request)
     {
         try{
-            $user = auth()->guard('web')->user();
+            $user = auth()->user();
             $restaurant = $user->restaurant;
             $file = $request->file('file');
             $filename = uniqid() . "_" . $file->getClientOriginalName();
