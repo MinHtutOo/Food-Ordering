@@ -48,9 +48,9 @@ class RestaurantController extends Controller
 
         $productCount = Menu::where('restaurant_id', $restaurant->id)->count();
 
-        return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes', 'products'));
+        return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes'));
         }else{
-            return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes', 'products'));
+            return view('restaurant.myRestaurant', compact('restaurant', 'user', 'dishes', 'productCount', 'trashedDishes'));
         }
 
     }

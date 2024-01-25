@@ -8,15 +8,36 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    // public function index()
+    // {
+    //     $dishes = Menu::select('id', 'name', 'price', 'description', 'image')
+    //                     ->orderBy('id', 'desc')
+    //                     ->paginate(6);
+
+    //     $count = Menu::count();
+
+    //     $categories = Category::select('id','name')->get();
+    //     return view('home', compact('dishes', 'categories', 'count'));
+    // }
+
     public function index()
     {
-        $count = Menu::all()->count();
-        $dishes = Menu::select('id', 'name', 'price', 'description', 'image')
-                ->orderBy('id', 'desc')
-                ->paginate(8);
+        $count = Menu::count();
 
-        $categories = Category::select('id','name')->get();
+        $categories = Category::with('menuItems')->get();
 
-        return view('home', compact('count', 'dishes', 'categories'));
+        // Get all items for "all items" tab
+        $allItems = Menu::select('id', 'name', 'price', 'description', 'image')
+            ->orderBy('id', 'desc')
+            ->paginate(12);
+
+        // Paginate menuItems for each category
+        foreach ($categories as $category) {
+            $category->menuItems = $category->menuItems()->paginate(8);
+        }
+
+        return view('home', compact('allItems', 'categories', 'count'));
     }
+
+
 }
