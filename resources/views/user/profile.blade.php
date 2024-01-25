@@ -380,7 +380,11 @@
                             <div class="tab-pane fade" id="account-details" role="tabpanel"
                                 aria-labelledby="account-details-tab" tabindex="0">
 
+<<<<<<< Updated upstream
                                 <form method="POST" action="#">
+=======
+                                <form method="POST" action="{{route('changePassword')}}">
+>>>>>>> Stashed changes
                                     @csrf
                                     <!-- account-details -->
                                     <div class="account-details">

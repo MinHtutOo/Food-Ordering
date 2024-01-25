@@ -72,8 +72,9 @@
                                 </h4>
                             </div>
                             
-                            <div class="chickens-inforbar d-flex align-items-center">
+                            {{-- <div class="chickens-inforbar d-flex align-items-center">
                                 <span class="rate ms-3 my-3"><a href="#" class="text-white"><i class="fas fa-star"></i> rate</a></span>
+<<<<<<< Updated upstream
                             </div>
                             <form action="#" method="POST">
                                 <div class="chickens-details d-flex justify-content-between">
@@ -81,6 +82,12 @@
                                         <input type="number" value="1" min="1" style="width: 170px;padding: 10px">
                                     </span>
                                 </div>
+=======
+                            </div> --}}
+                            <form action="{{route('addCart', $dish->id)}}" method="POST">
+                                @csrf
+
+>>>>>>> Stashed changes
                                 <button type="submit" class="btn">add to cart</button>
                             </form>
                         @endif
@@ -126,7 +133,15 @@
         </div>
         <div class="container d-flex justify-content-end">
             <span>
+<<<<<<< Updated upstream
                 <a href="{{route('myRestaurant')}}" class="btn btn-primary my-3"> back</a>
+=======
+                @if(auth()->guard('web')->check())
+                    <a href="{{ route('myRestaurant') }}" class="btn btn-primary my-3">back</a>
+                @elseif(auth()->guard('customer')->check())
+                    <a href="{{ route('menu', ['id' => $dish->restaurant_id]) }}" class="btn btn-primary my-3">back</a>
+                @endif
+>>>>>>> Stashed changes
             </span>
         </div>
     </section>
