@@ -139,7 +139,6 @@
                                         <p>{{Str::limit($dish->description, 90)}}</p>
                                         <span class="price badge-color">price :${{$dish->price}}</span>
                                     </div>
-                                    <!--span class="badge badge-bg-color">new</span-->
                                     <div class="cart-opt">
                                         <span>
                                             <a href="{{route('menu.edit', $dish->id)}}" title="Edit"><i class="fas fa-edit"></i></a>
