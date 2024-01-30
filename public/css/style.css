@@ -10124,5 +10124,22 @@ ul.slick-dots li.slick-active button {
     cursor: pointer;
 }
 
+.basket {
+    border: 1px solid #c33;
+    background: transparent;
+    color: #c33;
+    margin-bottom: 10px;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 50%;
+    display: block;
+    text-align: center!important;
+    transition: 0.5s;
+}
 
+.basket:hover {
+    background: #c33;
+    color: #fff;
+}
 

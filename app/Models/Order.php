@@ -10,17 +10,5 @@ class Order extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = [
-        'customer_id',
-        'menu_id',
-        'order_date',
-        'status',
-        'sub_total',
-        'grand_total',
-    ];
-
-    public function menu()
-    {
-        return $this->belongsTo(Menu::class);
-    }
+    
 }

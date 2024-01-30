@@ -138,7 +138,6 @@
                                             </a></h5>
                                         <p>{{Str::limit($dish->description, 90)}}</p>
                                         <span class="price badge-color">price :${{$dish->price}}</span>
-                                        <span class="rating"> <i class="fas fa-star"></i> 5star</span>
                                     </div>
                                     <!--span class="badge badge-bg-color">new</span-->
                                     <div class="cart-opt">

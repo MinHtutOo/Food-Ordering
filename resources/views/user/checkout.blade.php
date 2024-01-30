@@ -28,6 +28,22 @@
         </div>
     </div>
 
+    <div class="container my-3">
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{session('success')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{session('error')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+    </div>
+
     <!-- checkout-area -->
     <div class="checkout-area padding-top-120 padding-bottom-120">
         <div class="cshapes">
@@ -39,16 +55,16 @@
             <span class="cs-6"><img src="{!!asset('/images/shapes/16.png')!!}" alt=""></span>
         </div>
         <div class="container">
-            <form action="#">
+            <form action="{{ route('place.order') }}" method="POST" id="payment-form">
+                @csrf
                 <div class="row">
                     <div class="col-lg-6  wow fadeInUp">
                         <div class="checkout-left">
                             <h4>Billing Details</h4>
-                            <input type="text" placeholder="name" required>
-                            <input type="email" placeholder="email address" required>
-                            <input type="tel" placeholder="phone" required>
-                            <input type="text" placeholder="address">
-                            <input type="text" placeholder="order notes(optional)">
+                            <input type="text" value="{{ $customer->name }}">
+                            <input type="email" value="{{ $customer->email }}">
+                            <input type="tel" value="{{ $customer->phone }}">
+                            <input type="text" value="{{ $customer->address }}">       
                         </div>
                     </div>
                     <div class="col-lg-6  wow fadeInUp ">
@@ -56,49 +72,102 @@
                             <h4>Your Order</h4>
                             <div class="pricing-box">
                                 <ul class="p-head">
-                                    <li class="uppercase">product</li>
-                                    <li class="uppercase">total</li>
+                                    <li class="uppercase">Product</li>
+                                    <li class="uppercase">Total</li>
                                 </ul>
                                 <div class="divider"></div>
+                
+                                @foreach($orders as $order)
+                                    <ul>
+                                        <li>{{ $order->menu->name }}</li>
+                                        <li>${{ $order->menu->price }}</li>
+                                        <!-- Add hidden fields for each order -->
+                                        <input type="hidden" name="product_names[]" value="{{ $order->menu->name }}">
+                                        <input type="hidden" name="product_prices[]" value="{{ $order->menu->price }}">
+                                    </ul>
+                                @endforeach
+                
                                 <ul>
-                                    <li>Ultimate Photoshop Training</li>
-                                    <li>$1,699</li>
+                                    <li class="uppercase"><b>Subtotal</b></li>
+                                    <li><b>${{ $orders->sum('menu.price') }}</b></li>
                                 </ul>
-                                <ul>
-                                    <li>The Complete Financial Analyst</li>
-                                    <li>$1,699</li>
-                                </ul>
-                                <ul>
-                                    <li>The Complete Advanced WP</li>
-                                    <li>$1,699</li>
-                                </ul>
-                                <ul>
-                                    <li class="uppercase"><b>subtotal</b></li>
-                                    <li><b>$5,699</b></li>
-                                </ul>
+                
                                 <ul class="bg-white">
-                                    <li class="uppercase">total</li>
-                                    <li class="total"><b>$5,699</b></li>
+                                    <li class="uppercase">Total</li>
+                                    <li class="total"><b>${{ $orders->sum('menu.price') }}</b></li>
                                 </ul>
                             </div>
-                            <input type="radio" id="check">
-                            <label for="check">CHECK PAYMENTS</label>
+                
+                            <h4>Payment Method</h4>
+                            <input type="radio" name="payment_method" id="stripe" value="stripe">
+                            <label for="stripe">Stripe</label>
                             <br>
-                            <div class="payment-img">
-                                <a href="#"><img src="{!!asset('/images/img/payment.png')!!}" alt=""></a>
-                            </div>
-                            <input type="radio" id="cash">
+                
+                            <input type="radio" name="payment_method" id="cash" value="cash">
                             <label for="cash">CASH ON DELIVERY</label>
                             <br>
 
-                            <input type="radio" id="terms">
-                            <label for="terms">I’ve read and accept the <a href="#">terms & conditions *</a></label>
-                            <br>
-                            <button type="submit" class="btn">place order</button>
+                            <!-- Add Stripe Elements container -->
+                            <div id="card-element"></div>
+                            <div id="card-errors" role="alert"></div>
+                
+                            <button type="submit" class="btn" id="submit-button">Place Order</button>
                         </div>
                     </div>
+
+                    
                 </div>
             </form>
         </div>
     </div>
 @endsection
+
+<script src="https://js.stripe.com/v3/" data-publishable-key="{{ config('services.stripe.key') }}"></script>
+
+<script>
+    $(document).ready(function () {
+        var stripe = Stripe('pk_test_51O6oVWEBeZfFRhurjoMsoOm4NwGP6dWHitEkGNUPoMrJFRSVgCd6I9MG74yzqXMEycwQms4Z8taD0QX0fZUONN6k00xjTUSQdx');
+        var elements = stripe.elements();
+        var card = elements.create('card');
+        card.mount('#card-element');
+
+        var form = document.getElementById('payment-form');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            stripe.createPaymentMethod({
+                type: 'card',
+                card: card,
+            }).then(function (result) {
+                if (result.error) {
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Include CSRF token in the headers for AJAX
+                    var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                    fetch('/your-endpoint', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken,
+                        },
+                        body: JSON.stringify({
+                            payment_method_id: result.paymentMethod.id,
+                            // Other form data...
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Handle the response from the server
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+            });
+        });
+    });
+</script>
+

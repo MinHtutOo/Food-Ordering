@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\User;
+use App\Http\Controllers\Admin;
 use App\Http\Controllers\Customer;
 use App\Http\Controllers\Restaurant;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/about', function (){
     return view('about');
@@ -98,7 +98,7 @@ Route::post('user/signup', [Customer\CustomerController::class, 'store'])->name(
 Route::middleware(['auth:customer'])->group(function () {
     Route::post('logout', [Customer\CustomerController::class, 'logout'])->name('logout');
     Route::get('user/cart', [User\UserController::class, 'cart'])->name('user.cart');
-    Route::get('user/checkout', [User\UserController::class, 'checkout']);
+    Route::get('user/checkout', [Customer\OrderController::class, 'checkout'])->name('user.checkout');
     Route::get('user/profile', [User\UserController::class, 'viewProfile']);
 
     Route::get('restaurants/{id}/detail', [Restaurant\RestaurantController::class, 'detail'])->name('restaurant.detail');
@@ -107,6 +107,11 @@ Route::middleware(['auth:customer'])->group(function () {
     Route::post('addCart/{id}', [Customer\OrderController::class, 'addCart'])->name('addCart');
     Route::delete('remove/{id}', [Customer\OrderController::class, 'remove'])->name('remove');
     Route::get('restore/{id}', [Customer\OrderController::class, 'restore'])->name('restore');
+    Route::delete('forceDestroy/{id}', [Customer\OrderController::class, 'forceDestroy'])->name('forceDestroy');
+
+    Route::post('/place-order', [Customer\OrderController::class, 'placeOrder'])->name('place.order');
+    Route::get('/payment/success', [Customer\OrderController::class, 'paymentSuccess'])->name('payment.success');
+    Route::get('/payment/fail', [Customer\OrderController::class, 'paymentFail'])->name('payment.fail');
 });
 
 Route::get('restaurant/menu', [Restaurant\RestaurantController::class, 'showMenu']);

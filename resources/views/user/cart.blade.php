@@ -88,15 +88,14 @@
                                         <!--data-th="Price"-->
                                         <td>
                                             <!-- data-th="Quantity"-->
-                                            {{-- <input type="number" class="form-control text-center" value="1" min="1"> --}}
                                             <div class="d-flex justify-content-center">
-                                                <span class="left" data-id="{{ $cartItem->id }}">
+                                                <span class="left" data-id="{{ $cartItem->order_id }}">
                                                     <i class="fas fa-chevron-left"></i>
                                                 </span>
-                                                <span class="num" data-id="{{ $cartItem->id }}" data-quantity="1">
+                                                <span class="num" data-id="{{ $cartItem->order_id }}" data-quantity="1">
                                                     01
                                                 </span>
-                                                <span class="right" data-id="{{ $cartItem->id }}">
+                                                <span class="right" data-id="{{ $cartItem->order_id }}">
                                                     <i class="fas fa-chevron-right"></i>
                                                 </span>
                                             </div>
@@ -109,13 +108,24 @@
                                         <td>
                                             <!--class="actions" data-th=""-->
                                             @if($cartItem->trashed())
+                                            <div class="container d-flex">
                                                 <form method="GET" action="{{ route('restore', $cartItem->id) }}" class="d-inline" style="display:inline-block;">
                                                     @method('PATCH')
                                                     @csrf
-                                                    <button class="btn-success cartBtn">
+                                                    <button class="btn-success cartBtn me-2">
                                                         <i class="fas fa-undo-alt"  style="color: #fff;  margin-top:5px;"></i>
                                                     </button>
                                                 </form>
+
+                                                <form method="POST" action="{{ route('forceDestroy', $cartItem->id) }}" class="d-inline" style="display:inline-block;">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button class="btn-danger cartBtn ms-2">
+                                                        <i class="fas fa-trash" style="color: #fff; margin-top:5px;"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                                
                                             @else
                                                 <form method="POST" action="{{ route('remove', $cartItem->id) }}" class="d-inline" style="display:inline-block;">
                                                     @method('DELETE')
@@ -135,17 +145,18 @@
     
                 <!-- lower table -->
                 <div class="row margin-top-60">
-                    <form action="">
+                    <form action="{{route ('user.checkout')}}">
+                        @csrf
                         <div class="upper-table margin-bottom-30">
                             <div class="row">
                                 <div class="col-lg-6 col-md-12 margin-bottom-30">
-                                    <div class="upper-t-left">
+                                    {{-- <div class="upper-t-left">
                                         <span>
                                             <p><b>You Have ... Points {{auth()->user()->name}} .</b></p>
                                         </span>
 
                                         <input type="text" placeholder="Enter Points" style="display:block;">
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -156,7 +167,7 @@
                                 <div class="lower-table-info">
                                     <ul id="subtotal" class="d-flex justify-content-between">
                                         <li class="sub">SUBTOTAL</li>
-                                        <li>${{}}</li>
+                                        <li>$</li>
                                     </ul>
                                     <hr>
                                     <ul id="grand-total" class="d-flex justify-content-between">
@@ -225,59 +236,113 @@
                 updateTotals();
             });
         </script>
-@endsection
 
-{{-- <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const plusButtons = document.querySelectorAll('.right');
-        const minusButtons = document.querySelectorAll('.left');
-        const numberDisplays = document.querySelectorAll('.num');
-        const subtotalElements = document.querySelectorAll('.subtotal');
+        {{-- <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const plusButtons = document.querySelectorAll('.right');
+                const minusButtons = document.querySelectorAll('.left');
+                const numberDisplays = document.querySelectorAll('.num');
+                const subtotalElements = document.querySelectorAll('.subtotal');
 
-        function updateSubtotal(index) {
-            const quantity = parseInt(numberDisplays[index].textContent, 10);
-            const price = parseFloat(subtotalElements[index].getAttribute('data-price'));
-            const subtotal = quantity * price;
-            subtotalElements[index].textContent = '$' + subtotal.toFixed(2);
+                function updateSubtotal(index) {
+                    const quantity = parseInt(numberDisplays[index].textContent, 10);
+                    const price = parseFloat(subtotalElements[index].getAttribute('data-price'));
+                    const subtotal = quantity * price;
+                    subtotalElements[index].textContent = '$' + subtotal.toFixed(2);
 
-            updateTotals();
-        }
-
-        function updateTotals() {
-            let total = 0;
-
-            subtotalElements.forEach(subtotalElement => {
-                total += parseFloat(subtotalElement.textContent.replace('$', '')) || 0;
-            });
-
-            document.getElementById('subtotal').textContent = '$' + total.toFixed(2);
-        }
-
-        plusButtons.forEach((plusButton, index) => {
-            plusButton.addEventListener('click', () => {
-                let i = parseInt(numberDisplays[index].textContent, 10);
-                i++;
-                i = (i < 10) ? '0' + i : i;
-                numberDisplays[index].textContent = i;
-                updateSubtotal(index);
-            });
-        });
-
-        minusButtons.forEach((minusButton, index) => {
-            minusButton.addEventListener('click', () => {
-                let i = parseInt(numberDisplays[index].textContent, 10);
-                if (i > 1) {
-                    i--;
-                    i = (i < 10) ? '0' + i : i;
-                    numberDisplays[index].textContent = i;
-                    updateSubtotal(index);
+                    updateTotals();
+                    sendUpdateToServer(index, quantity); // Send the update to the server
                 }
-            });
-        });
 
-        updateTotals();
-    });
-</script> --}}
+                function updateTotals() {
+                    let total = 0;
+
+                    subtotalElements.forEach(subtotalElement => {
+                        total += parseFloat(subtotalElement.textContent.replace('$', '')) || 0;
+                    });
+
+                    document.getElementById('subtotal').lastElementChild.textContent = '$' + total.toFixed(2);
+                    document.getElementById('grand-total').lastElementChild.textContent = '$' + total.toFixed(2);
+                }
+
+                function sendUpdateToServer(index, quantity) {
+                    const orderID = numberDisplays[index].getAttribute('data-id');
+
+                    // Fetch the order ID from the server dynamically
+                    fetch('http://food.org/user/getOrderID', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Check if the data contains the order ID
+                        if (data.orderID) {
+                            // Use the dynamically fetched order ID
+                            const dynamicallyFetchedOrderID = data.orderID;
+
+                            // Continue with your existing code...
+                            // Send an AJAX request to your server to update the quantity
+                            fetch('http://food.org/user/updateCart', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                },
+                                body: JSON.stringify({
+                                    orderID: dynamicallyFetchedOrderID,
+                                    quantity: quantity,
+                                }),
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                // Handle the response if needed
+                                console.log(data);
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                        } else {
+                            console.error('Error: Order ID not available from the server.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+
+                }
+
+                plusButtons.forEach((plusButton, index) => {
+                    plusButton.addEventListener('click', () => {
+                        let i = parseInt(numberDisplays[index].textContent, 10);
+                        i++;
+                        i = (i < 10) ? '0' + i : i;
+                        numberDisplays[index].textContent = i;
+                        updateSubtotal(index);
+                    });
+                });
+
+                minusButtons.forEach((minusButton, index) => {
+                    minusButton.addEventListener('click', () => {
+                        let i = parseInt(numberDisplays[index].textContent, 10);
+                        if (i > 1) {
+                            i--;
+                            i = (i < 10) ? '0' + i : i;
+                            numberDisplays[index].textContent = i;
+                            updateSubtotal(index);
+                        }
+                    });
+                });
+
+                updateTotals();
+            });
+
+        </script> --}}
+        
+@endsection
 
 
 

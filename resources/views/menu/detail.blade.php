@@ -89,9 +89,6 @@
                                 </h4>
                             </div>
                             
-                            <div class="chickens-inforbar d-flex align-items-center">
-                                <span class="rate ms-3 my-3"><a href="#" class="text-white"><i class="fas fa-star"></i> rate</a></span>
-                            </div>
                             <form action="{{route('addCart', $dish->id)}}" method="POST">
                                 @csrf
 
@@ -140,7 +137,11 @@
         </div>
         <div class="container d-flex justify-content-end">
             <span>
-                <a href="{{ route('menu', $dish->restaurant_id)}}" class="btn btn-primary my-3"> back</a>
+                @if(auth()->guard('web')->check())
+                    <a href="{{ route('myRestaurant') }}" class="btn btn-primary my-3">back</a>
+                @elseif(auth()->guard('customer')->check())
+                    <a href="{{ route('menu', ['id' => $dish->restaurant_id]) }}" class="btn btn-primary my-3">back</a>
+                @endif
             </span>
         </div>
     </section>

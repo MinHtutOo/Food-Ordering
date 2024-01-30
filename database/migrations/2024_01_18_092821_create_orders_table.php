@@ -15,12 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers');
-            $table->unsignedBigInteger('menu_id');
-            $table->foreign('menu_id')->references('id')->on('menus');
-            $table->date('order_date')->nullable();
-            $table->enum('status', ['pending', 'completed', 'cancelled']);
-            $table->decimal('sub_total');
-            $table->decimal('grand_total');
+            $table->date('order_date');
+            $table->decimal('total');
             $table->timestamps();
         });
     }
