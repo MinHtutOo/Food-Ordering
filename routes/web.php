@@ -42,7 +42,7 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
         Route::post('logout', [Admin\AdminController::class, 'adminLogout'])->name('admin.logout');
         Route::get('profile', [Admin\AdminController::class, 'adminProfile'])->name('admin.profile');
         Route::get('dashboard', [Admin\AdminController::class, 'index'])->name('dashboard');
-        Route::get('owners', [Admin\AdminController::class, 'showOwnerList']);
+        Route::get('owners', [Admin\AdminController::class, 'showOwnerList'])->name('owner.list');
 
         Route::get('role', [Admin\RoleController::class, 'index'])->name('role.index');
         Route::get('role/create', [Admin\RoleController::class, 'create'])->name('role.create');
@@ -53,6 +53,13 @@ Route::group(['prefix'=> 'admin', 'namespace' => 'admin'], function () {
 
         Route::get('{id}/permission', [Admin\RoleController::class, 'permission'])->name('user.permission');
         Route::put('{id}/assignPermission', [Admin\RoleController::class, 'assignPermission'])->name('user.assignPermission');
+
+        Route::get('owners/create', [Admin\AdminController::class, 'createOwner'])->name('owner.create');
+        Route::post('owners/create', [Admin\AdminController::class, 'storeOwner'])->name('owner.store');
+        Route::get('owners/{id}/edit', [Admin\AdminController::class, 'editOwner'])->name('owner.edit');
+        Route::put('owners/{id}/update', [Admin\AdminController::class, 'updateOwner'])->name('owner.update');
+        Route::delete('owners/{id}/destroy', [Admin\AdminController::class, 'destroy'])->name('owner.destroy');
+        Route::get('owners/{id}/restore', [Admin\AdminController::class, 'restore'])->name('owner.restore');
 
         Route::get('customers', [Customer\CustomerController::class, 'showCustomerList'])->name('customer.list');
         Route::get('customers/{id}/edit', [Customer\CustomerController::class, 'editCustomer'])->name('customer.edit');

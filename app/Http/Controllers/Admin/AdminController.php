@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Exception;
+use App\Models\User;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\OwnerRequest;
 use App\Http\Controllers\Controller;
-
 
 class AdminController extends Controller
 {
@@ -52,7 +53,40 @@ class AdminController extends Controller
 
     public function showOwnerList()
     {
-        return view('admin.ownerList');
+        $owners = User::role('owner')->with('restaurant')->get();
+
+        foreach ($owners as $owner) {
+            // Accessing the restaurant for each owner
+            $restaurant = $owner->restaurant;
+            // You can do something with $restaurant here
+        }
+
+        return view('admin.ownerList', compact('owners'));
+    }
+
+    public function createOwner()
+    {
+        return view('admin.createOwner');
+    }
+
+    public function storeOwner(OwnerRequest $request)
+    {
+        try{
+            $owner = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'password' => bcrypt($request->password),
+            ]);
+    
+            $owner->assignRole('owner');
+            dd($owner);
+
+            return redirect()->route('owner.list')->with('success', 'Owner created successfully');
+        }catch(Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     public function showOrderList()
